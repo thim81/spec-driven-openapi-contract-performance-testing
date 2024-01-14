@@ -1,0 +1,12 @@
+{
+  "local": "../openapi_final.yml",
+  "output": "marvel.postman.json",
+  "portmanConfigFile": "./config/portman-config.yaml",
+  "postmanConfigFile": "./config/openapi-postman-config.json",
+  "filterFile":  "./config/portman-filter.yaml",
+  "includeTests": true,
+  "syncPostman": true,
+  "postmanWorkspaceName": "Marvel",
+  "collectionName": "Marvel Universe API - Portman",
+  "newmanOptionsFile": "./config/newman-options.json"
+}

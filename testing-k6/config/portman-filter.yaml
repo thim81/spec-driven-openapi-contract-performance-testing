@@ -1,0 +1,12 @@
+flags:
+  - x-exclude
+flagValues: [ ]
+tags: [ ]
+methods: []
+#  - delete
+#  - put
+#  - post
+operationIds:
+  - post-characters
+  - put-character
+  - delete-character

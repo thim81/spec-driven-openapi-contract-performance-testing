@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Character {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  first_name  String?
+  last_name   String?
+  description String?
+  powers      String?
+  // created_at   DateTime @default(now())
+  // updated_at   DateTime @default(now())
+
+  @@index([name])
+}
+
+model Team {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String
+
+  @@index([name])
+}
+
+model Movie {
+  id            Int      @id @default(autoincrement())
+  title         String   @unique
+  release_date  DateTime?
+  director      String?
+  description   String?
+
+  @@index([title])
+}

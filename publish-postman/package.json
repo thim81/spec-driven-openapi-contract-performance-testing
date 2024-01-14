@@ -1,0 +1,15 @@
+{
+  "name": "api-formatting",
+  "version": "1.0.0",
+  "description": "OpenAPI formatting",
+  "scripts": {
+    "publish-openapi-yaml": "openapi-format ../openapi.yml  --output marvel.openapi.yaml --filterFile config/openapi-filter.yaml",
+    "convert-openapi-cli": "portman --cliOptionsFile config/portman-cli-options.json",
+    "publish-postman": "npm run convert-openapi-cli"
+  },
+  "author": "Tim Haselaars",
+  "license": "ISC",
+  "dependencies": {
+    "@apideck/portman": "^1.24.0"
+  }
+}

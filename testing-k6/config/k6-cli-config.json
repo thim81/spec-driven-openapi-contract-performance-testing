@@ -1,0 +1,7 @@
+{
+  "output": "k6/marvel.k6.js",
+  "separate": false,
+  "k6-params": "./config/k6-params.json",
+  "k6-request-tagging": "folder-request",
+  "k6-handle-summary-json": "summary-report.json"
+}

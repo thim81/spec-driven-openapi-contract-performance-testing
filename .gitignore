@@ -1,0 +1,8 @@
+*/node_modules/*
+build
+npm-debug.log
+.nyc
+*/.env
+*/tmp/*
+.DS_Store
+*.zip

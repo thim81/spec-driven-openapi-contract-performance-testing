@@ -1,0 +1,8 @@
+{
+  "local": "../openapi.yml",
+  "output": "marvel.postman.json",
+  "filterFile":  "./config/openapi-filter.yaml",
+  "includeTests": false,
+  "syncPostman": true,
+  "postmanWorkspaceName": "Marvel"
+}

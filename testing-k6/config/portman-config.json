@@ -1,0 +1,56 @@
+{
+  "version": 1.0,
+  "tests": {
+    "contractTests": [
+      {
+        "openApiOperation": "*::/*",
+        "statusSuccess": {
+          "enabled": true
+        }
+      }
+    ]
+  },
+  "assignVariables": [
+    {
+      "openApiOperation": "POST::*",
+      "collectionVariables": [
+        {
+          "responseBodyProp": "id",
+          "name": "<tag>Id"
+        }
+      ]
+    }
+  ],
+  "overwrites": [
+    {
+      "openApiOperation": "*::/*/{id}",
+      "overwriteRequestPathVariables": [
+        {
+          "key": "id",
+          "value": "{{<tag>Id}}",
+          "overwrite": true
+        }
+      ]
+    },
+    {
+      "openApiOperationIds": ["postCharacters","putCharacter"],
+      "overwriteRequestBody": [
+        {
+          "key": "name",
+          "value": " {{$guid}}",
+          "overwrite": false
+        }
+      ]
+    }
+  ],
+  "globals": {
+    "stripResponseExamples": true,
+    "variableCasing": "camelCase",
+    "separatorSymbol": "==",
+    "securityOverwrites": {
+      "bearer": {
+        "token": "{{bearerToken}}"
+      }
+    }
+  }
+}

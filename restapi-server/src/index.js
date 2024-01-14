@@ -4,14 +4,18 @@ import {fileURLToPath} from 'url';
 import {dirname} from 'path';
 import path from 'path';
 
-
 import charactersRoutes from "./routes/characters.routes.js";
 import teamsRoutes from "./routes/teams.routes.js";
 import moviesRoutes from "./routes/movies.routes.js";
 
-const port = 3004
+import homeRoutes from "./static/home.routes.js";
+import docsRoutes from "./static/docs.routes.js";
+import reportRoutes from "./static/report.routes.js";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+const port = 3004
 
 const app = new express();
 
@@ -44,43 +48,10 @@ app.use((req, res, next) => {
 
 // ----- STATIC FILES
 
-// Trigger Docs routes
-app.get('/docs/redocly', function (req, res) {
-  const filePath = path.join(__dirname, '../docs/redocly/index.html');
-  res.sendFile(filePath);
-});
-app.get('/docs/scalar', function (req, res) {
-  const filePath = path.join(__dirname, '../docs/scalar/index.html');
-  res.sendFile(filePath);
-});
-app.get('/docs/swagger', function (req, res) {
-  const filePath = path.join(__dirname, '../docs/swagger/index.html');
-  res.sendFile(filePath);
-});
-app.get('/docs/openapi/marvel.openapi.json', function (req, res) {
-  const filePath = path.join(__dirname, '../../publish-openapi/marvel.openapi.json');
-  res.sendFile(filePath);
-});
-app.get('/docs/openapi/marvel.openapi.yaml', function (req, res) {
-  const filePath = path.join(__dirname, '../../publish-openapi/marvel.openapi.yaml');
-  res.sendFile(filePath);
-});
-app.get('/docs/openapi', function (req, res) {
-  const filePath = path.join(__dirname, '../../openapi.yml');
-  res.sendFile(filePath);
-});
-app.get('/docs/openapi', function (req, res) {
-  const filePath = path.join(__dirname, '../../openapi.yml');
-  res.sendFile(filePath);
-});
-app.get('/report/newman', function (req, res) {
-  const filePath = path.join(__dirname, '../../testing-contract/report/report.html');
-  res.sendFile(filePath);
-});
-app.get('/report/k6', function (req, res) {
-  const filePath = path.join(__dirname, '../../testing-k6/report/report.html');
-  res.sendFile(filePath);
-});
+app.use('/assets', express.static(path.join(__dirname, '../public/assets')));
+app.use('/', homeRoutes);
+app.use('/docs', docsRoutes);
+app.use('/report', reportRoutes);
 
 // ----- REST API
 

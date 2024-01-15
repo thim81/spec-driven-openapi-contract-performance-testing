@@ -63,7 +63,7 @@ paths:
   '/characters/{id}':
     get:
       operationId: getCharacter
-      summary: Get a Marvel character by ID
+      summary: Get a Marvel character
       description: Retrieve information about a specific Marvel character.
       parameters:
         - $ref: '#/components/parameters/CharacterId'
@@ -84,7 +84,7 @@ paths:
         - Characters
     put:
       operationId: putCharacter
-      summary: Update a Marvel character by ID
+      summary: Update a Marvel character
       description: Update information about a specific Marvel character.
       parameters:
         - $ref: '#/components/parameters/CharacterId'
@@ -126,7 +126,7 @@ paths:
         - Characters
     delete:
       operationId: deleteCharacter
-      summary: Delete a Marvel character by ID
+      summary: Delete a Marvel character
       description: Delete a specific Marvel character.
       parameters:
         - $ref: '#/components/parameters/CharacterId'
@@ -186,7 +186,7 @@ paths:
   '/teams/{id}':
     get:
       operationId: getCharacter
-      summary: Get a Marvel team by ID
+      summary: Get a Marvel team
       description: Retrieve information about a specific Marvel team.
       parameters:
         - $ref: '#/components/parameters/TeamId'
@@ -207,7 +207,7 @@ paths:
         - Teams
     put:
       operationId: putCharacter
-      summary: Update a Marvel team by ID
+      summary: Update a Marvel team
       description: Update information about a specific Marvel team.
       parameters:
         - $ref: '#/components/parameters/TeamId'
@@ -240,7 +240,7 @@ paths:
         - Teams
     delete:
       operationId: deleteCharacter
-      summary: Delete a Marvel team by ID
+      summary: Delete a Marvel team
       description: Delete a specific Marvel team.
       parameters:
         - $ref: '#/components/parameters/TeamId'
@@ -282,6 +282,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MarvelMovieModel'
+            example:
+              title: Spider-man Across the Spider-Verse
+              release_date: 2023-06-02
+              description: Miles Morales is back in the Spider-Verse, and things are going to get even stranger with a face-to-face encounter from the Spider Society.
+              director: Joaquim Dos Santos
       responses:
         '201':
           description: Successfully created
@@ -299,8 +304,8 @@ paths:
         - Movies
   '/movies/{id}':
     get:
-      operationId: getCharacter
-      summary: Get a Marvel movie by ID
+      operationId: getMovie
+      summary: Get a Marvel movie
       description: Retrieve information about a specific Marvel movie.
       parameters:
         - $ref: '#/components/parameters/MovieId'
@@ -320,8 +325,8 @@ paths:
       tags:
         - Movies
     put:
-      operationId: putCharacter
-      summary: Update a Marvel movie by ID
+      operationId: putMovie
+      summary: Update a Marvel movie
       description: Update information about a specific Marvel movie.
       parameters:
         - $ref: '#/components/parameters/MovieId'
@@ -331,13 +336,18 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MarvelMovieModel'
+            example:
+              title: 'Spider-man: Across the Spider-Verse'
+              release_date: 2023-06-02
+              description: Miles Morales is back in the Spider-Verse, and things are going to get even stranger with a face-to-face encounter from the Spider Society.
+              director: Joaquim Dos Santos
       responses:
         '200':
           description: Successfully updated
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MarvelCharacterModel'
+                $ref: '#/components/schemas/MarvelMovieModel'
         '404':
           description: Marvel movie not found
           content:
@@ -353,8 +363,8 @@ paths:
       tags:
         - Movies
     delete:
-      operationId: deleteCharacter
-      summary: Delete a Marvel movie by ID
+      operationId: deleteMovie
+      summary: Delete a Marvel movie
       description: Delete a specific Marvel movie.
       parameters:
         - $ref: '#/components/parameters/TeamId'
@@ -623,6 +633,12 @@ components:
           type: string
       example:
         error: Marvel character not found
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - bearerAuth: []
 tags:
   - name: Characters
     description: Manage all Marvel characters.

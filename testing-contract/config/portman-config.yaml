@@ -32,7 +32,7 @@ assignVariables:
     excludeForOperations:
       - "GET::/*/{id}"
     collectionVariables:
-      - responseBodyProp: characters[0].id
+      - responseBodyProp: <tag>[0].id
         name: <tag>Id
 overwrites:
   - openApiOperation: "*::/*/{id}"
@@ -43,6 +43,6 @@ overwrites:
 globals:
   stripResponseExamples: true
   variableCasing: camelCase
-  securityOverwrites:
-    bearer:
-      token: "{{bearerToken}}"
+#  securityOverwrites:
+#    bearer:
+#      token: "{{bearerToken}}"

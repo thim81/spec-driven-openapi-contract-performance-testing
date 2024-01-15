@@ -33,10 +33,28 @@
       ]
     },
     {
-      "openApiOperationIds": ["postCharacters","putCharacter"],
+      "openApiOperationIds": [
+        "postCharacters",
+        "putCharacter",
+        "postTeams",
+        "putTeam"
+      ],
       "overwriteRequestBody": [
         {
           "key": "name",
+          "value": " {{$guid}}",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "openApiOperationIds": [
+        "postMovies",
+        "putMovie"
+      ],
+      "overwriteRequestBody": [
+        {
+          "key": "title",
           "value": " {{$guid}}",
           "overwrite": false
         }
@@ -46,11 +64,7 @@
   "globals": {
     "stripResponseExamples": true,
     "variableCasing": "camelCase",
-    "separatorSymbol": "==",
-    "securityOverwrites": {
-      "bearer": {
-        "token": "{{bearerToken}}"
-      }
-    }
+    "separatorSymbol": "=="
   }
 }
+

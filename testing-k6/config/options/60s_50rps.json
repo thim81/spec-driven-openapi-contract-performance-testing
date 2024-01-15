@@ -1,0 +1,14 @@
+{
+  "stages": [
+    { "duration": "5s", "target": 50 },
+    { "duration": "50s", "target": 50 },
+    { "duration": "5s", "target": 0 }
+  ],
+  "thresholds": {
+    "http_req_duration": ["p(95)<500"],
+    "checks": ["rate>0.9"],
+    "http_req_failed": ["rate<0.2"]
+  },
+  "rps": 50,
+  "batchPerHost": 0
+}

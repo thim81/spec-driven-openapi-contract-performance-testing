@@ -1,5 +1,5 @@
 {
-  "local": "../openapi_final.yml",
+  "local": "../openapi.yml",
   "output": "marvel.postman.json",
   "portmanConfigFile": "./config/portman-config.yaml",
   "postmanConfigFile": "./config/openapi-postman-config.json",

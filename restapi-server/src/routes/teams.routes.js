@@ -90,7 +90,7 @@ router.put("/teams/:id", async (req, res) => {
     const resourceId = +req.params.id;
 
     // Validate request body
-    const validatedPayload = await validateRequestPayload('team', req.body);
+    const validatedPayload = await validateRequestPayload('Team', req.body);
 
     const updatedResource = await prisma.team.update({
       where: {

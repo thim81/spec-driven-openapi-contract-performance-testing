@@ -2,7 +2,6 @@
   "local": "../openapi.yml",
   "output": "k6/marvel.postman.json",
   "portmanConfigFile": "./config/portman-config.json",
-  "postmanConfigFile": "./config/openapi-postman-config.json",
   "filterFile":  "./config/portman-filter.yaml",
   "includeTests": true,
   "syncPostman": false,

@@ -1,7 +1,7 @@
 {
-  "name": "api-formatting",
+  "name": "openapi-publish",
   "version": "1.0.0",
-  "description": "OpenAPI formatting",
+  "description": "OpenAPI formatting and publishing",
   "scripts": {
     "publish-openapi-yaml": "openapi-format ../openapi.yml  --output marvel.openapi.yaml --filterFile config/openapi-filter.yaml",
     "publish-openapi-json": "openapi-format ../openapi.yml  --output marvel.openapi.json --filterFile config/openapi-filter.yaml",

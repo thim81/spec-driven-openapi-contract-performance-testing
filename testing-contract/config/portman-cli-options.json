@@ -4,7 +4,7 @@
   "portmanConfigFile": "./config/portman-config.yaml",
   "filterFile":  "./config/portman-filter.yaml",
   "includeTests": true,
-  "syncPostman": true,
+  "syncPostman": false,
   "postmanWorkspaceName": "Marvel",
   "collectionName": "Marvel Universe API - Portman",
   "newmanOptionsFile": "./config/newman-options.json"

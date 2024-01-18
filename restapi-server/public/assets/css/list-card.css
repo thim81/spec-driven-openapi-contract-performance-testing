@@ -244,6 +244,16 @@ ul.card-items li {
     align-self: flex-start
 }
 
+.card.top-newman {
+    border-top: 4px solid #f79220;
+    align-self: flex-start
+}
+
+.card.top-k6 {
+    border-top: 4px solid #7d64ff;
+    align-self: flex-start
+}
+
 .card.top-green {
     border-top: 3.5px solid #66CC69;
 }
@@ -268,7 +278,8 @@ ul.card-items li {
     color: var(--link-color);
     text-decoration: none;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     height: 64px;
     border-radius: 4px;
     box-sizing: border-box;
@@ -389,9 +400,16 @@ article .changelog.item {
 .md-content {
     flex-grow: 1;
     min-width: 0;
-    margin: 10%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+header {
+    background-color: rgb(255,0, 35);
+    text-align: center;
 }
 
 body {
-    font-family: Avenir, -apple-system, "system-ui", Helvetica, Arial, sans-serif
+    font-family: Avenir, -apple-system, "system-ui", Helvetica, Arial, sans-serif;
+    margin: 0;
 }

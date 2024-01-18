@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marvel Universe - Developer portal</title>
-<!--    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">-->
     <link href="/assets/css/list-card.css" rel="stylesheet">
+    <link rel="icon" href="/assets/logo/favicon.ico" type="image/x-icon" sizes="16x16 32x32">
 </head>
 <body class="font-sans bg-gray-100">
 
 <article class="md-content">
+    <header>
+        <img src="/assets/logo/marvel-logo.png" style="width: 50%; height: auto;">
+    </header>
     <h1 id="discover-the-marigold-engage-apis" class="text-2xl font-bold mb-4">Discover the Marvel Universe API
     </h1>
 
@@ -28,7 +31,7 @@
 
         <div class="card box p-4">
             <h3 class="text-lg font-bold">Marvel Universe API - Scalar</h3>
-            <p class="description">Explore the Marvel Universe API with Swagger.</p>
+            <p class="description">Explore the Marvel Universe API with Scalar.</p>
             <a href="/docs/scalar" title="Get started with the Marvel Universe API with Scalar" class="md-button mt-2">Explore API →</a>
         </div>
     </div>
@@ -48,7 +51,7 @@
             <p class="card-body"><small>Download the OpenAPI specifications of our API references:</small></p>
             <ul class="box-list">
                 <li>
-                    <a href="/openapi/marvel.openapi.json" class="text-blue-500">Marvel Universe OpenAPI specification<span class="subtext">version: 1.0</span></a>
+                    <a href="/openapi/marvel.openapi.json" target="_blank" class="text-blue-500">Download OpenAPI specification<span class="subtext">version: 1.0</span></a>
                 </li>
             </ul>
         </div>
@@ -63,7 +66,38 @@
             <p class="card-body"><small>Use Postman collections as a playground for our API references:</small></p>
             <ul class="box-list">
                 <li>
-                    <a href="/postman/marvel.postman.json" class="text-blue-500">Marvel Universe Postman collection<span class="subtext">version: 1.0</span></a>
+                    <a href="/postman/marvel.postman.json" target="_blank" class="text-blue-500">Download Postman collection<span class="subtext">version: 1.0</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="cards grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div class="card top-newman p-4">
+            <div class="card-header flex items-center">
+                <div class="logo">
+                    <img src="/assets/logo/newman.png" alt="Newman test results specifications" class="w-8 h-8" style="width: 84px; height: auto;">
+                </div>
+                <h3 class="text-lg font-bold ml-2">Contract testing</h3>
+            </div>
+            <p class="card-body"><small>View the latest contract test results:</small></p>
+            <ul class="box-list">
+                <li>
+                    <a href="/report/newman" target="_blank"  class="text-blue-500">Open Newman test results<span class="subtext">latest</span></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card top-k6 p-4">
+            <div class="card-header flex items-center">
+                <div class="logo">
+                    <img src="/assets/logo/k6.svg" alt="K6 test results" class="w-8 h-8" style="width: 60px; height: auto;">
+                </div>
+                <h3 class="text-lg font-bold ml-2">Performance testing</h3>
+            </div>
+            <p class="card-body"><small>View the latest performance test results:</small></p>
+            <ul class="box-list">
+                <li>
+                    <a href="/report/k6" target="_blank" class="text-blue-500">Open K6 latest test results<span class="subtext">latest</span></a>
                 </li>
             </ul>
         </div>

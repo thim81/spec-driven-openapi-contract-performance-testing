@@ -1,0 +1,23 @@
+{
+    "name": "thim/kiota",
+    "description": "Marvel API SDK",
+    "require": {
+        "microsoft/kiota-abstractions": "1.1.0",
+        "symfony/http-client": "^7.0",
+        "nyholm/psr7": "^1.8",
+        "microsoft/kiota-http-guzzle": "1.2.0",
+        "microsoft/kiota-serialization-json": "1.0.1",
+        "microsoft/kiota-serialization-text": "1.0.1",
+        "microsoft/kiota-authentication-phpleague": "1.0.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "KiotaMarvelClient\\": "client/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

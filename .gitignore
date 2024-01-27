@@ -6,3 +6,4 @@ npm-debug.log
 */tmp/*
 .DS_Store
 *.zip
+/sdk/kiota/vendor/

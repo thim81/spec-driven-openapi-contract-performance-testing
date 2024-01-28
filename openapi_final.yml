@@ -436,56 +436,6 @@ components:
         type: integer
         default: 1
   schemas:
-    CharactersResponse:
-      type: object
-      properties:
-        characters:
-          description: List of Marvel characters.
-          type: array
-          items:
-            $ref: '#/components/schemas/MarvelCharacterModel'
-          example:
-            characters:
-              - id: 1
-                name: Iron Man
-                first_name: Tony
-                last_name: Stark
-                description: 'Genius, billionaire, playboy, philanthropist.'
-                powers:
-                  - Superhuman strength
-                  - Powered armor suit
-                  - Genius-level intellect
-              - id: 2
-                name: Spider-Man
-                first_name: Peter
-                last_name: Parker
-                description: Friendly neighborhood superhero.
-                powers:
-                  - Wall-crawling
-                  - Spider-sense
-                  - Web-shooters
-        pagination:
-          $ref: '#/components/schemas/PaginationModel'
-    TeamsResponse:
-      type: object
-      properties:
-        characters:
-          description: List of Marvel teams.
-          type: array
-          items:
-            $ref: '#/components/schemas/MarvelTeamModel'
-        pagination:
-          $ref: '#/components/schemas/PaginationModel'
-    MoviesResponse:
-      type: object
-      properties:
-        movies:
-          description: List of Marvel movies.
-          type: array
-          items:
-            $ref: '#/components/schemas/MarvelMovieModel'
-        pagination:
-          $ref: '#/components/schemas/PaginationModel'
     MarvelCharacterModel:
       description: A Marvel character.
       type: object
@@ -580,6 +530,56 @@ components:
       required:
         - title
         - description
+    CharactersResponse:
+      type: object
+      properties:
+        characters:
+          description: List of Marvel characters.
+          type: array
+          items:
+            $ref: '#/components/schemas/MarvelCharacterModel'
+          example:
+            characters:
+              - id: 1
+                name: Iron Man
+                first_name: Tony
+                last_name: Stark
+                description: 'Genius, billionaire, playboy, philanthropist.'
+                powers:
+                  - Superhuman strength
+                  - Powered armor suit
+                  - Genius-level intellect
+              - id: 2
+                name: Spider-Man
+                first_name: Peter
+                last_name: Parker
+                description: Friendly neighborhood superhero.
+                powers:
+                  - Wall-crawling
+                  - Spider-sense
+                  - Web-shooters
+        pagination:
+          $ref: '#/components/schemas/PaginationModel'
+    TeamsResponse:
+      type: object
+      properties:
+        characters:
+          description: List of Marvel teams.
+          type: array
+          items:
+            $ref: '#/components/schemas/MarvelTeamModel'
+        pagination:
+          $ref: '#/components/schemas/PaginationModel'
+    MoviesResponse:
+      type: object
+      properties:
+        movies:
+          description: List of Marvel movies.
+          type: array
+          items:
+            $ref: '#/components/schemas/MarvelMovieModel'
+        pagination:
+          $ref: '#/components/schemas/PaginationModel'
     PaginationModel:
       description: Pagination information.
       type: object

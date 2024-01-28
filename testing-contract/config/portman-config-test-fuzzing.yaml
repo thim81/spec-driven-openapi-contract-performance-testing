@@ -24,9 +24,9 @@ tests:
         enabled: true
   variationTests:
     - openApiOperation: "*::/characters"
-#      openApiResponse: '4**'
+      openApiResponse: '422'
       variations:
-        - name: Unprocessable
+        - name: Invalid requests
           fuzzing:
             - requestBody:
                 - requiredFields:
@@ -39,7 +39,24 @@ tests:
                     enabled: true
                   maxLengthFields:
                     enabled: true
-              requestQueryParams:
+          tests:
+            contractTests:
+              - statusCode:
+                  enabled: true
+                contentType:
+                  enabled: true
+                jsonBody:
+                  enabled: true
+                schemaValidation:
+                  enabled: true
+                headersPresent:
+                  enabled: true
+    - openApiOperation: "*::/characters"
+      openApiResponse: '400'
+      variations:
+        - name: Bad requests
+          fuzzing:
+            - requestQueryParams:
                 - requiredFields:
                     enabled: true
                   minimumNumberFields:

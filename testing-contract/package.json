@@ -11,12 +11,12 @@
     "open-report": "node _utils/openReport.js",
     "-----":  "----------------------------------------------------------------------------------------------------------------",
     "convert-test-content": "portman --cliOptionsFile config/portman-cli-options.json --portmanConfigFile config/portman-config-test-content.yaml --collectionName 'Marvel API - Test Content'",
-    "convert-test-fuzzing": "portman --cliOptionsFile config/portman-cli-options.json --portmanConfigFile config/portman-config-test-fuzzing.yaml --collectionName 'Marvel API - Test Fuzzing'"
+    "convert-test-fuzzing": "portman --cliOptionsFile config/portman-cli-options.json --portmanConfigFile config/portman-config-test-fuzzing.yaml --collectionName 'Marvel API - Test Fuzzing' --syncPostman true"
   },
   "author": "Tim Haselaars",
   "license": "ISC",
   "dependencies": {
-    "@apideck/portman": "^1.26.0",
+    "@apideck/portman": "^1.26.2",
     "newman": "^6.1.0",
     "newman-reporter-htmlextra": "^1.23.0",
     "newman-reporter-influxdb": "^2.0.4"

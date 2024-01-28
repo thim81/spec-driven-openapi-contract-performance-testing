@@ -24,6 +24,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CharactersResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
         - Characters
     post:
@@ -57,7 +69,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvalidRequestError'
+                $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
         - Characters
   '/characters/{id}':
@@ -121,7 +133,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvalidRequestError'
+                $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
         - Characters
     delete:
@@ -180,12 +192,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvalidRequestError'
+                $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
         - Teams
   '/teams/{id}':
     get:
-      operationId: getCharacter
+      operationId: getTeam
       summary: Get a Marvel team
       description: Retrieve information about a specific Marvel team.
       parameters:
@@ -206,7 +218,7 @@ paths:
       tags:
         - Teams
     put:
-      operationId: putCharacter
+      operationId: putTeam
       summary: Update a Marvel team
       description: Update information about a specific Marvel team.
       parameters:
@@ -235,7 +247,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvalidRequestError'
+                $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
         - Teams
     delete:
@@ -299,7 +311,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvalidRequestError'
+                $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
         - Movies
   '/movies/{id}':
@@ -359,7 +371,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvalidRequestError'
+                $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
         - Movies
     delete:
@@ -423,7 +435,6 @@ components:
       schema:
         type: integer
         default: 1
-        minimum: 1
   schemas:
     CharactersResponse:
       type: object
@@ -602,7 +613,7 @@ components:
               description: The total number of pages.
               type: integer
               example: 10
-    InvalidRequestError:
+    UnprocessableEntityError:
       type: object
       properties:
         error:
@@ -625,6 +636,14 @@ components:
         details:
           - field: first_name
             message: Field 'first_name' must be of type 'String'.
+    BadRequestError:
+      type: object
+      properties:
+        error:
+          description: Description of the error.
+          type: string
+      example:
+        error: Page number cannot be greater than total number of pages
     NotFoundError:
       type: object
       properties:

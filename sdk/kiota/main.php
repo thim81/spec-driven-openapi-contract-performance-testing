@@ -48,8 +48,7 @@ try {
     echo "Created new character with ID: {$newCharacterId}\n";
     echo var_export($newCharacterRes, true) . "\n";
 
-    // PUT /characters/{id}
-    //$update = new MarvelCharacterModel();
+    // PUT /characters/{id};
     // Only update last name
     $newCharacter->setLastName("T'Chaka");
 

@@ -2,6 +2,10 @@
 
 Run Composer install
 
+```terminal
+composer install
+```
+
 ### Generate SDK
 
 ```terminal
@@ -25,7 +29,11 @@ To load the newly generated classes can be imported, update the autoload paths u
 composer dumpautoload
 ```
 
+### Run main PHP
 
+```terminal
+php main.php
+```
 
 
 

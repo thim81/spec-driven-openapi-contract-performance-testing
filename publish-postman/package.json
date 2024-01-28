@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Publish OpenAPI to public Postman collection",
   "scripts": {
-    "publish-openapi-yaml": "openapi-format ../openapi.yml  --output marvel.openapi.yaml --filterFile config/openapi-filter.yaml",
     "convert-openapi-cli": "portman --cliOptionsFile config/portman-cli-options.json",
     "publish-postman": "npm run convert-openapi-cli"
   },

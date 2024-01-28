@@ -25,7 +25,7 @@ router.get("/teams", async (req, res) => {
     }
 
     // Check if the requested limit is out of range
-    if (limit >= 100 || limit <= 0) {
+    if (limit > 100 || limit <= 0) {
       return res.status(400).json({
         error: `Limit cannot be greater than 100 or less than 1`
       });

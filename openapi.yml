@@ -197,7 +197,7 @@ paths:
         - Teams
   '/teams/{id}':
     get:
-      operationId: getCharacter
+      operationId: getTeam
       summary: Get a Marvel team
       description: Retrieve information about a specific Marvel team.
       parameters:
@@ -218,7 +218,7 @@ paths:
       tags:
         - Teams
     put:
-      operationId: putCharacter
+      operationId: putTeam
       summary: Update a Marvel team
       description: Update information about a specific Marvel team.
       parameters:

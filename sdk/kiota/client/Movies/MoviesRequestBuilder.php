@@ -4,9 +4,9 @@ namespace KiotaMarvelClient\Movies;
 
 use Exception;
 use Http\Promise\Promise;
-use KiotaMarvelClient\Models\InvalidRequestError;
 use KiotaMarvelClient\Models\MarvelMovieModel;
 use KiotaMarvelClient\Models\MoviesResponse;
+use KiotaMarvelClient\Models\UnprocessableEntityError;
 use KiotaMarvelClient\Movies\Item\MoviesItemRequestBuilder;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
 use Microsoft\Kiota\Abstractions\HttpMethod;
@@ -64,7 +64,7 @@ class MoviesRequestBuilder extends BaseRequestBuilder
     public function post(MarvelMovieModel $body, ?MoviesRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
         $errorMappings = [
-                '422' => [InvalidRequestError::class, 'createFromDiscriminatorValue'],
+                '422' => [UnprocessableEntityError::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [MarvelMovieModel::class, 'createFromDiscriminatorValue'], $errorMappings);
     }

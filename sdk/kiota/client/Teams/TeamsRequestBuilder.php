@@ -4,9 +4,9 @@ namespace KiotaMarvelClient\Teams;
 
 use Exception;
 use Http\Promise\Promise;
-use KiotaMarvelClient\Models\InvalidRequestError;
 use KiotaMarvelClient\Models\MarvelTeamModel;
 use KiotaMarvelClient\Models\TeamsResponse;
+use KiotaMarvelClient\Models\UnprocessableEntityError;
 use KiotaMarvelClient\Teams\Item\TeamsItemRequestBuilder;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
 use Microsoft\Kiota\Abstractions\HttpMethod;
@@ -64,7 +64,7 @@ class TeamsRequestBuilder extends BaseRequestBuilder
     public function post(MarvelTeamModel $body, ?TeamsRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
         $errorMappings = [
-                '422' => [InvalidRequestError::class, 'createFromDiscriminatorValue'],
+                '422' => [UnprocessableEntityError::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [MarvelTeamModel::class, 'createFromDiscriminatorValue'], $errorMappings);
     }

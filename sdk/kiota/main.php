@@ -57,6 +57,7 @@ try {
 
     // DELETE /character/{id}
     $client->characters()->byId($newCharacterId)->delete()->wait();
+    echo "Delete character - ID: {$newCharacterId}\n";
 } catch (ApiException $ex) {
     echo $ex->getMessage();
 } catch (Exception $e) {

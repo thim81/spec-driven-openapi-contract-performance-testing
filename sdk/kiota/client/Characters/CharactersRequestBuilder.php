@@ -5,9 +5,10 @@ namespace KiotaMarvelClient\Characters;
 use Exception;
 use Http\Promise\Promise;
 use KiotaMarvelClient\Characters\Item\CharactersItemRequestBuilder;
+use KiotaMarvelClient\Models\BadRequestError;
 use KiotaMarvelClient\Models\CharactersResponse;
-use KiotaMarvelClient\Models\InvalidRequestError;
 use KiotaMarvelClient\Models\MarvelCharacterModel;
+use KiotaMarvelClient\Models\UnprocessableEntityError;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
 use Microsoft\Kiota\Abstractions\HttpMethod;
 use Microsoft\Kiota\Abstractions\RequestAdapter;
@@ -51,7 +52,11 @@ class CharactersRequestBuilder extends BaseRequestBuilder
     */
     public function get(?CharactersRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [CharactersResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [BadRequestError::class, 'createFromDiscriminatorValue'],
+                '422' => [UnprocessableEntityError::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [CharactersResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -64,7 +69,7 @@ class CharactersRequestBuilder extends BaseRequestBuilder
     public function post(MarvelCharacterModel $body, ?CharactersRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
         $errorMappings = [
-                '422' => [InvalidRequestError::class, 'createFromDiscriminatorValue'],
+                '422' => [UnprocessableEntityError::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [MarvelCharacterModel::class, 'createFromDiscriminatorValue'], $errorMappings);
     }

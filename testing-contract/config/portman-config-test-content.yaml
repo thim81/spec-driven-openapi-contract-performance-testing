@@ -29,6 +29,11 @@ tests:
           value: Spider-Man
         - key: characters[1].description
           contains: Friendly
+        - key: characters[1].powers
+          minLength: 2
+          maxLength: 3
+        - key: characters[1].title
+          notExist: true
 assignVariables:
   - openApiOperation: POST::*
     collectionVariables:

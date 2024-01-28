@@ -14,7 +14,7 @@ router.get("/teams", async (req, res) => {
     const offset = (page - 1) * limit;
 
     // Get total number of resources
-    const totalResources = await prisma.character.count();
+    const totalResources = await prisma.team.count();
     const totalPages = Math.ceil(totalResources / limit);
 
     // Check if the requested page is out of range
@@ -32,7 +32,7 @@ router.get("/teams", async (req, res) => {
     }
 
     // Get resources
-    const resources = await prisma.character.findMany({
+    const resources = await prisma.team.findMany({
       skip: offset,
       take: limit,
     });

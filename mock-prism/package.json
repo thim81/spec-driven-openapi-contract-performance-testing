@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Prism mock server",
   "scripts": {
-    "start": "prism mock ../openapi.yml --p 3004"
+    "start": "prism mock ../openapi.yml --p 3004",
+    "start-dynamic": "prism mock -d ../openapi.yml --p 3004"
   },
   "author": "Tim Haselaars",
   "license": "ISC",

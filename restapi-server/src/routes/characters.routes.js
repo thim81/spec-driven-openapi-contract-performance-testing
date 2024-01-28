@@ -10,7 +10,7 @@ const router = new Router();
 router.get("/characters", async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1; // Default to page 1 if not provided
-    const limit = parseInt(req.query.limit) || 10; // Default limit to 10 if not provided
+    const limit = (req.query.limit !== undefined) ? parseInt(req.query.limit) : 10; // Default limit to 10 if not provided
 
     const offset = (page - 1) * limit;
 
@@ -24,7 +24,14 @@ router.get("/characters", async (req, res) => {
         error: `Page number cannot be greater than ${totalPages}`
       });
     }
-    
+
+    // Check if the requested limit is out of range
+    if (limit >= 100 || limit <= 0) {
+      return res.status(400).json({
+        error: `Limit cannot be greater than 100 or less than 1`
+      });
+    }
+
     // Get resources
     const resources = await prisma.character.findMany({
       skip: offset,

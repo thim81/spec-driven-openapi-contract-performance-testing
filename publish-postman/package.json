@@ -4,7 +4,7 @@
   "description": "Publish OpenAPI to public Postman collection",
   "scripts": {
     "convert-openapi-cli": "portman --cliOptionsFile config/portman-cli-options.json",
-    "publish-postman": "npm run convert-openapi-cli"
+    "publish-postman": "portman --cliOptionsFile config/portman-cli-options.json --syncPostman false"
   },
   "author": "Tim Haselaars",
   "license": "ISC",

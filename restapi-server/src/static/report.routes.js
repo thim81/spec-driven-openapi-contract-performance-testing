@@ -17,5 +17,9 @@ router.get('/k6', function (req, res) {
   const filePath = path.join(__dirname, '../../../testing-k6/report/report.html');
   res.sendFile(filePath);
 });
+router.get('/k6-graph', function (req, res) {
+  const filePath = path.join(__dirname, '../../../testing-k6/report/report-graph.html');
+  res.sendFile(filePath);
+});
 
 export default router;

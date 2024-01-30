@@ -251,7 +251,7 @@ paths:
       tags:
         - Teams
     delete:
-      operationId: deleteCharacter
+      operationId: deleteTeam
       summary: Delete a Marvel team
       description: Delete a specific Marvel team.
       parameters:
@@ -539,25 +539,24 @@ components:
           items:
             $ref: '#/components/schemas/MarvelCharacterModel'
           example:
-            characters:
-              - id: 1
-                name: Iron Man
-                first_name: Tony
-                last_name: Stark
-                description: 'Genius, billionaire, playboy, philanthropist.'
-                powers:
-                  - Superhuman strength
-                  - Powered armor suit
-                  - Genius-level intellect
-              - id: 2
-                name: Spider-Man
-                first_name: Peter
-                last_name: Parker
-                description: Friendly neighborhood superhero.
-                powers:
-                  - Wall-crawling
-                  - Spider-sense
-                  - Web-shooters
+            - id: 1
+              name: Iron Man
+              first_name: Tony
+              last_name: Stark
+              description: 'Genius, billionaire, playboy, philanthropist.'
+              powers:
+                - Superhuman strength
+                - Powered armor suit
+                - Genius-level intellect
+            - id: 2
+              name: Spider-Man
+              first_name: Peter
+              last_name: Parker
+              description: Friendly neighborhood superhero.
+              powers:
+                - Wall-crawling
+                - Spider-sense
+                - Web-shooters
         pagination:
           $ref: '#/components/schemas/PaginationModel'
     TeamsResponse:

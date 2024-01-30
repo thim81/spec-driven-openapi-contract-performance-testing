@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Publish OpenAPI to public Postman collection",
   "scripts": {
-    "convert-openapi-cli": "portman --cliOptionsFile config/portman-cli-options.json",
+    "convert-openapi-cli": "portman --cliOptionsFile config/portman-cli-options.json --syncPostman true",
     "publish-postman": "portman --cliOptionsFile config/portman-cli-options.json --syncPostman false"
   },
   "author": "Tim Haselaars",

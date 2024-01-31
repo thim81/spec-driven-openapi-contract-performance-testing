@@ -562,7 +562,7 @@ components:
     TeamsResponse:
       type: object
       properties:
-        characters: # TODO
+        teams:
           description: List of Marvel teams.
           type: array
           items:

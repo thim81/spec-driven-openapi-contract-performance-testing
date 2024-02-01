@@ -1,0 +1,17 @@
+{
+  "name": "validate-openapi",
+  "version": "1.0.0",
+  "description": "OpenAPI validation with Redocly, Spectral and OpenAPI Examples Validator",
+  "scripts": {
+    "validate-openapi": "redocly lint ../openapi.yml",
+    "validate-openapi-spectral": "spectral lint  ../openapi.yml",
+    "validate-examples": "openapi-examples-validator ../openapi.yml"
+  },
+  "author": "Tim Haselaars",
+  "license": "ISC",
+  "dependencies": {
+    "@stoplight/spectral-cli": "^6.11.0",
+    "@redocly/cli": "^1.8.1",
+    "openapi-examples-validator": "^5.0.0"
+  }
+}

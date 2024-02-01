@@ -1,0 +1,5 @@
+{
+  "verbose": true,
+  "output": "marvel.openapi.yaml",
+  "filterFile": "config/openapi-filter.yaml"
+}

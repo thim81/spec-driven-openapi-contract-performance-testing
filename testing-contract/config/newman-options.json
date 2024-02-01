@@ -1,0 +1,7 @@
+{
+  "iteration-count": 1,
+  "suppress-exit-code" : true,
+  "ignore-redirects": true,
+  "insecure": true,
+  "abort-on-failure": false
+}

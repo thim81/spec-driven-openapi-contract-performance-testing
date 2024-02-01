@@ -1,0 +1,3 @@
+Warning: KiotaBuilder OpenAPI warning: #/paths/~1movies/post/requestBody/content/application~1json/example/release_date - Data and type mismatch found.
+Warning: KiotaBuilder OpenAPI warning: #/paths/~1movies~1{id}/put/requestBody/content/application~1json/example/release_date - Data and type mismatch found.
+Warning: KiotaBuilder OpenAPI warning: #/components/schemas/CharactersResponse/properties/characters/example - Data and type mismatch found.

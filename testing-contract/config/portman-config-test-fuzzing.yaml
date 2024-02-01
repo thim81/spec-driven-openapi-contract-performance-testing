@@ -1,0 +1,104 @@
+
+$schema: '/Users/thim/Sites/portman/src/utils/portman-config-schema.json'
+version: 1
+tests:
+  contractTests:
+    - openApiOperation: "*::/*"
+      statusSuccess:
+        enabled: true
+    - openApiOperation: "*::/*"
+      responseTime:
+        enabled: false
+        maxMs: 5
+    - openApiOperation: "*::/*"
+      contentType:
+        enabled: true
+    - openApiOperation: "*::/*"
+      jsonBody:
+        enabled: true
+    - openApiOperation: "*::/*"
+      schemaValidation:
+        enabled: true
+    - openApiOperation: "*::/*"
+      headersPresent:
+        enabled: true
+  variationTests:
+    - openApiOperation: "*::/characters"
+      openApiResponse: '422'
+      variations:
+        - name: Invalid requests
+          fuzzing:
+            - requestBody:
+                - requiredFields:
+                    enabled: true
+                  minimumNumberFields:
+                    enabled: true
+                  maximumNumberFields:
+                    enabled: true
+                  minLengthFields:
+                    enabled: true
+                  maxLengthFields:
+                    enabled: true
+          tests:
+            contractTests:
+              - statusCode:
+                  enabled: true
+                contentType:
+                  enabled: true
+                jsonBody:
+                  enabled: true
+                schemaValidation:
+                  enabled: true
+                headersPresent:
+                  enabled: true
+    - openApiOperation: "*::/characters"
+      openApiResponse: '400'
+      variations:
+        - name: Bad requests
+          fuzzing:
+            - requestQueryParams:
+                - requiredFields:
+                    enabled: true
+                  minimumNumberFields:
+                    enabled: true
+                  maximumNumberFields:
+                    enabled: true
+                  minLengthFields:
+                    enabled: true
+                  maxLengthFields:
+                    enabled: true
+          tests:
+            contractTests:
+              - statusCode:
+                  enabled: true
+                contentType:
+                  enabled: true
+                jsonBody:
+                  enabled: true
+                schemaValidation:
+                  enabled: true
+                headersPresent:
+                  enabled: true
+assignVariables:
+  - openApiOperation: POST::*
+    collectionVariables:
+      - responseBodyProp: id
+        name: <tag>Id
+  - openApiOperation: GET::*
+    excludeForOperations:
+      - "GET::/*/{id}"
+    collectionVariables:
+      - responseBodyProp: characters[0].id
+        name: <tag>Id
+overwrites:
+  - openApiOperation: "*::/*/{id}"
+    overwriteRequestPathVariables:
+      - key: id
+        value: '{{<tag>Id}}'
+        overwrite: true
+globals:
+  stripResponseExamples: true
+  variableCasing: camelCase
+  securityOverwrites:
+    bearer:
+      token: "{{bearerToken}}"

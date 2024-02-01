@@ -1,0 +1,14 @@
+{
+  "name": "prism-mock-server",
+  "version": "1.0.0",
+  "description": "Prism mock server",
+  "scripts": {
+    "mock": "prism mock ../openapi.yml --p 3004",
+    "mock-dynamic": "prism mock -d ../openapi.yml --p 3004"
+  },
+  "author": "Tim Haselaars",
+  "license": "ISC",
+  "dependencies": {
+    "@stoplight/prism-cli": "^5.5.3"
+  }
+}

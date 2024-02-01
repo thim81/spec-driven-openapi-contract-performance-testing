@@ -1,0 +1,11 @@
+{
+  "local": "../openapi.yml",
+  "output": "k6/marvel.postman.json",
+  "portmanConfigFile": "./config/portman-config.json",
+  "filterFile":  "./config/portman-filter.yaml",
+  "includeTests": true,
+  "syncPostman": false,
+  "postmanWorkspaceName": "Marvel",
+  "collectionName": "Marvel Universe API - K6",
+  "newmanOptionsFile": "./config/newman-options.json"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "api-contact-testing",
+  "version": "1.0.0",
+  "description": "OpenAPI contract testing via Postman",
+  "scripts": {
+    "convert-openapi": "portman --local ../openapi.yml --output marvel.postman.json --syncPostman",
+    "convert-openapi-cli": "portman --cliOptionsFile config/portman-cli-options.json --syncPostman false",
+    "convert-run-newman": "portman --cliOptionsFile config/portman-cli-options.json --runNewman --syncPostman false",
+    "run-newman-report": "newman run marvel.postman.json -n 5 --insecure -r htmlextra --reporter-htmlextra-export ./report/report.html && npm run open-report",
+    "run-newman-influx": "newman run marvel.postman.json -n 5 --insecure -r htmlextra,influxdb --reporter-htmlextra-export ./report/report.html --reporter-influxdb-server localhost --reporter-influxdb-port 8086 --reporter-influxdb-name newman --reporter-influxdb-measurement api_results && npm run open-report",
+    "open-report": "node _utils/openReport.js",
+    "-----":  "----------------------------------------------------------------------------------------------------------------",
+    "convert-test-content": "portman --cliOptionsFile config/portman-cli-options.json --portmanConfigFile config/portman-config-test-content.yaml --collectionName 'Marvel Universe API - Test Content' --syncPostman true",
+    "convert-test-fuzzing": "portman --cliOptionsFile config/portman-cli-options.json --portmanConfigFile config/portman-config-test-fuzzing.yaml --collectionName 'Marvel Universe API - Test Fuzzing' --syncPostman true"
+  },
+  "author": "Tim Haselaars",
+  "license": "ISC",
+  "dependencies": {
+    "@apideck/portman": "^1.26.2",
+    "newman": "^6.1.0",
+    "newman-reporter-htmlextra": "^1.23.0",
+    "newman-reporter-influxdb": "^2.0.4"
+  }
+}

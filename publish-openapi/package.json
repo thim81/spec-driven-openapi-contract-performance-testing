@@ -1,0 +1,15 @@
+{
+  "name": "openapi-publish",
+  "version": "1.0.0",
+  "description": "OpenAPI formatting and publishing",
+  "scripts": {
+    "publish-openapi-yaml": "openapi-format ../openapi.yml  --output marvel.openapi.yaml --filterFile config/openapi-filter.yaml",
+    "publish-openapi-json": "openapi-format ../openapi.yml  --output marvel.openapi.json --filterFile config/openapi-filter.yaml",
+    "publish-openapi": "npm run publish-openapi-yaml && npm run publish-openapi-json"
+  },
+  "author": "Tim Haselaars",
+  "license": "ISC",
+  "dependencies": {
+    "openapi-format": "^1.16.0"
+  }
+}

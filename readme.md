@@ -11,6 +11,11 @@ The outcome of this proof-of-concept is a working API, with a full set of docume
 
 ![spec-driven-workflow.png](img/spec-driven-workflow.png)
 
+The meetup is recorded and can be watched on Youtube:
+https://www.youtube.com/watch?v=YXRstde1SeA&t=198s
+
+<a href="https://www.youtube.com/watch?v=YXRstde1SeA&t=198s">![spec-driven-youtube.png](img/spec-driven-youtube.png)</a>
+
 ## Getting started
 
 The repository contains a OpenAPI Spec file `openapi.yml`, which is used as the central source to generate documentation, mock server, postman collection, contract tests, performance tests and client SDKs.

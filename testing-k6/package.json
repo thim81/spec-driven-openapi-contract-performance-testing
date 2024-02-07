@@ -19,7 +19,7 @@
   "author": "Tim Haselaars",
   "license": "ISC",
   "dependencies": {
-    "@apideck/portman": "^1.26.2",
+    "@apideck/portman": "^1.26.3",
     "@apideck/postman-to-k6": "^1.8.10",
     "k6-html-reporter": "^1.0.5"
   }

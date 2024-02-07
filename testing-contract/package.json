@@ -16,8 +16,8 @@
   "author": "Tim Haselaars",
   "license": "ISC",
   "dependencies": {
-    "@apideck/portman": "^1.26.2",
-    "newman": "^6.1.0",
+    "@apideck/portman": "^1.26.3",
+    "newman": "^6.1.1",
     "newman-reporter-htmlextra": "^1.23.0",
     "newman-reporter-influxdb": "^2.0.4"
   }

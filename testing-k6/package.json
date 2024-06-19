@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "OpenAPI performance testing via K6",
   "scripts": {
-    "prepare": "portman --cliOptionsFile config/portman-cli-options.json --syncPostman false",
-    "convert-postman-k6": "npm run prepare && postman-to-k6 k6/marvel.postman.json -o k6/marvel.k6.js",
-    "convert-postman-k6-extra": "npm run prepare && postman-to-k6 k6/marvel.postman.json --cli-options-file config/k6-cli-config.json",
+    "convert": "portman --cliOptionsFile config/portman-cli-options.json --syncPostman false",
+    "convert-postman-k6": "npm run convert && postman-to-k6 k6/marvel.postman.json -o k6/marvel.k6.js",
+    "convert-postman-k6-extra": "npm run convert && postman-to-k6 k6/marvel.postman.json --cli-options-file config/k6-cli-config.json",
     "run-k6": "k6 run k6/marvel.k6.js",
     "run-k6-report": "K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT=report/report-graph.html k6 run k6/marvel.k6.js && npm run generate-report && npm run open-report",
     "run-k6-breakit": "K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT=report/report-graph.html k6 run k6/marvel.k6.js --vus 1000 --duration 10s && npm run generate-report && npm run open-report",
@@ -19,8 +19,8 @@
   "author": "Tim Haselaars",
   "license": "ISC",
   "dependencies": {
-    "@apideck/portman": "^1.26.3",
-    "@apideck/postman-to-k6": "^1.8.10",
+    "@apideck/portman": "^1.27.0",
+    "@apideck/postman-to-k6": "^1.10.0",
     "k6-html-reporter": "^1.0.5"
   }
 }

@@ -1,0 +1,28 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/mock-prism"
+      interval: "weekly"
+  - package-ecosystem: "npm"
+    directory: "/publish-openapi"
+      interval: "weekly"
+  - package-ecosystem: "npm"
+    directory: "/publish-postman"
+      interval: "weekly"
+  - package-ecosystem: "npm"
+    directory: "/restapi-server"
+      interval: "weekly"
+  - package-ecosystem: "npm"
+    directory: "/testing-contract"
+      interval: "weekly"
+  - package-ecosystem: "npm"
+    directory: "/testing-k6"
+      interval: "weekly"
+  - package-ecosystem: "npm"
+    directory: "/validate-openapi"
+      interval: "weekly"

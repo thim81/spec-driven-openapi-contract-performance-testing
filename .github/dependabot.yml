@@ -6,30 +6,30 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-      directory: "/mock-prism"
-      schedule:
-        interval: "weekly"
+    directory: "/mock-prism"
+    schedule:
+      interval: "weekly"
   - package-ecosystem: "npm"
-      directory: "/publish-openapi"
-      schedule:
-        interval: "weekly"
+    directory: "/publish-openapi"
+    schedule:
+      interval: "weekly"
   - package-ecosystem: "npm"
-      directory: "/publish-postman"
-      schedule:
-        interval: "weekly"
+    directory: "/publish-postman"
+    schedule:
+      interval: "weekly"
   - package-ecosystem: "npm"
-      directory: "/restapi-server"
-      schedule:
-        interval: "weekly"
+    directory: "/restapi-server"
+    schedule:
+      interval: "weekly"
   - package-ecosystem: "npm"
-      directory: "/testing-contract"
-      schedule:
-        interval: "weekly"
+    directory: "/testing-contract"
+    schedule:
+      interval: "weekly"
   - package-ecosystem: "npm"
-      directory: "/testing-k6"
-      schedule:
-        interval: "weekly"
+    directory: "/testing-k6"
+    schedule:
+      interval: "weekly"
   - package-ecosystem: "npm"
-      directory: "/validate-openapi"
-      schedule:
-        interval: "weekly"
+    directory: "/validate-openapi"
+    schedule:
+      interval: "weekly"

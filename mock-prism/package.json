@@ -9,6 +9,6 @@
   "author": "Tim Haselaars",
   "license": "ISC",
   "dependencies": {
-    "@stoplight/prism-cli": "^5.8.3"
+    "@stoplight/prism-cli": "^5.9.0"
   }
 }

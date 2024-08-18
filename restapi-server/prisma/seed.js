@@ -97,42 +97,48 @@ async function seedMovies() {
         title: "Iron Man",
         release_date: "2008-05-02",
         director: "Jon Favreau",
-        description: "A wealthy industrialist builds a powered exoskeleton and becomes the technologically advanced superhero Iron Man."
+        description: "A wealthy industrialist builds a powered exoskeleton and becomes the technologically advanced superhero Iron Man.",
+        rank: 1
       },
       {
         id: 2,
         title: "The Avengers",
         release_date: "2012-05-04",
         director: "Joss Whedon",
-        description: "Nick Fury of S.H.I.E.L.D. brings together a team of superheroes to save the world from imminent destruction."
+        description: "Nick Fury of S.H.I.E.L.D. brings together a team of superheroes to save the world from imminent destruction.",
+        rank: 5
       },
       {
         id: 3,
         title: "Black Panther",
         release_date: "2018-02-16",
         director: "Ryan Coogler",
-        description: "T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and confront a challenger from his country's past."
+        description: "T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and confront a challenger from his country's past.",
+        rank: 9
       },
       {
         id: 4,
         title: "Avengers: Endgame",
         release_date: "2019-04-26",
         director: "Anthony and Joe Russo",
-        description: "The Avengers must assemble once again to undo the actions of the villain Thanos and restore balance to the universe."
+        description: "The Avengers must assemble once again to undo the actions of the villain Thanos and restore balance to the universe.",
+        rank: 6
       },
       {
         id: 5,
         title: "Spider-Man: No Way Home",
         release_date: "2021-12-17",
         director: "Jon Watts",
-        description: "Peter Parker's identity is revealed, and he seeks the help of Doctor Strange to undo the chaos caused by a spell gone wrong."
+        description: "Peter Parker's identity is revealed, and he seeks the help of Doctor Strange to undo the chaos caused by a spell gone wrong.",
+        rank: 3
       },
       {
         id: 6,
         title: "Guardians of the Galaxy",
         release_date: "2014-08-01",
         director: "James Gunn",
-        description: "A group of intergalactic criminals are forced to work together to stop a fanatical warrior with plans to purge the universe."
+        description: "A group of intergalactic criminals are forced to work together to stop a fanatical warrior with plans to purge the universe.",
+        rank: 10
       },
       {
         id: 7,
@@ -140,6 +146,7 @@ async function seedMovies() {
         release_date: "2017-05-05",
         director: "James Gunn",
         description: "The Guardians must fight to keep their newfound family together as they unravel the mystery of Peter Quill's true parentage.",
+        rank: 19
       },
     ]
 

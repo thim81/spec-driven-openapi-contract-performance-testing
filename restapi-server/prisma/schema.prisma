@@ -37,6 +37,7 @@ model Movie {
   release_date  DateTime?
   director      String?
   description   String?
+  rank          Int?
 
   @@index([title])
 }

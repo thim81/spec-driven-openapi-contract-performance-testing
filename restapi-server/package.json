@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.18.0",
-    "@prisma/internals": "^5.9.0",
+    "@prisma/internals": "^5.18.0",
     "express": "^4.19.2"
   }
 }

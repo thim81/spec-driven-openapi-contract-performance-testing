@@ -129,9 +129,15 @@ export const validateRequestPayload = async (modelName, requestBody) => {
 }
 
 export const typeValidation = (data, fieldType) => {
-  const type = fieldType.toLowerCase()
-  if (fieldType === 'DateTime') {
-    return data instanceof Date
+  const type = fieldType.toLowerCase();
+  if (type === 'datetime') {
+    return data instanceof Date;
   }
-  return typeof data === type
-}
+  if (type === 'int') {
+    return typeof data === 'number';
+  }
+  if (type === 'float') {
+    return typeof data === 'number';
+  }
+  return typeof data === type;
+};

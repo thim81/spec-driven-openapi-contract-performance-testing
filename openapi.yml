@@ -299,6 +299,7 @@ paths:
               release_date: 2023-06-02
               description: Miles Morales is back in the Spider-Verse, and things are going to get even stranger with a face-to-face encounter from the Spider Society.
               director: Joaquim Dos Santos
+              rank: 3
       responses:
         '201':
           description: Successfully created
@@ -353,6 +354,7 @@ paths:
               release_date: 2023-06-02
               description: Miles Morales is back in the Spider-Verse, and things are going to get even stranger with a face-to-face encounter from the Spider Society.
               director: Joaquim Dos Santos
+              rank: 3
       responses:
         '200':
           description: Successfully updated
@@ -526,6 +528,10 @@ components:
           type: string
           example: "A wealthy industrialist builds a powered exoskeleton and becomes the technologically advanced superhero Iron Man."
           nullable: true
+        rank:
+          description: The ranking of the Marvel movie.
+          type: number
+          example: 1
       additionalProperties: false
       required:
         - title

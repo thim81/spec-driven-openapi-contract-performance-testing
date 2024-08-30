@@ -62,3 +62,10 @@ Server URL: http://localhost:8086
 Configure Grafana to use InfluxDB as a data source
 
 http://localhost:3000/d/XKhgaUpik/k6-load-testing-results-2?orgId=1
+
+### Reset Grafana admin password
+
+```shell
+cd /opt/homebrew/opt/grafana/share/grafana 
+grafana-cli admin reset-admin-password <new-password>
+```

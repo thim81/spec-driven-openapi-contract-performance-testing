@@ -18,11 +18,11 @@
   "author": "Tim Haselaars",
   "license": "ISC",
   "devDependencies": {
-    "prisma": "^5.18.0"
+    "prisma": "^5.19.0"
   },
   "dependencies": {
-    "@prisma/client": "^5.18.0",
-    "@prisma/internals": "^5.18.0",
+    "@prisma/client": "^5.19.0",
+    "@prisma/internals": "^5.19.0",
     "express": "^4.19.2"
   }
 }

@@ -9,7 +9,7 @@
     "generate": "prisma generate",
     "reset": "prisma migrate reset --force",
     "seed": "prisma db seed",
-    "server-start": "prisma migrate dev && node src/index.js",
+    "server-start": "prisma migrate deploy && node src/index.js",
     "server-watch": "node --watch src/index.js"
   },
   "prisma": {

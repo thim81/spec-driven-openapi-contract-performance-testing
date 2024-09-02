@@ -7,12 +7,12 @@ So instead of `http://localhost:3004/api/characters` it will be `http://localhos
 ## API service with example responses
 
 ```bash
-prism mock ../openapi.yml --p 3004
+prism mock ../openapi.yml --p 3005
 ```
 
 ## API service with dynamic responses
 
 ```bash
-prism mock -d ../openapi.yml --p 3004
+prism mock -d ../openapi.yml --p 3005
 ```
 

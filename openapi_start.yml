@@ -201,7 +201,7 @@ paths:
       operationId: getCharacter
       x-exclude: true
       summary: Get a Marvel team
-      description: Retrieve information about a specific Marvel team.
+      # description: Retrieve information about a specific Marvel team,
       parameters:
         - $ref: '#/components/parameters/TeamId'
       responses:
@@ -308,11 +308,11 @@ components:
         title:
           description: The name of the Marvel team.
           type: string
-#          example: Guardians of the Galaxy
+          # example: Guardians of the Galaxy
         description:
           description: A brief description of the Marvel team.
           type: string
-#          example: Interstellar heroes protecting the galaxy
+          # example: Interstellar heroes protecting the galaxy
           nullable: true
       additionalProperties: false
       required:

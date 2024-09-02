@@ -7,6 +7,10 @@ info:
     url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Marvel-Comics-Logo.svg/1280px-Marvel-Comics-Logo.svg.png'
 servers:
   - url: 'http://localhost:3004/api'
+    description: Local
+  - url: 'http://localhost:3005'
+    description: Mock
+  - url: 'https://api-b6feef562ff3.deltablue.io/api'
     description: Production
 paths:
   /characters:

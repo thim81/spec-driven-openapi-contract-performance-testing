@@ -6,7 +6,11 @@ info:
   x-logo:
     url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Marvel-Comics-Logo.svg/1280px-Marvel-Comics-Logo.svg.png'
 servers:
-  - url: 'http://localhost:3004'
+  - url: 'http://localhost:3004/api'
+    description: Local
+  - url: 'http://localhost:3005'
+    description: Mock
+  - url: 'https://api-b6feef562ff3.deltablue.io/api'
     description: Production
 paths:
   /characters:
@@ -197,7 +201,7 @@ paths:
       operationId: getCharacter
       x-exclude: true
       summary: Get a Marvel team
-      description: Retrieve information about a specific Marvel team.
+      # description: Retrieve information about a specific Marvel team,
       parameters:
         - $ref: '#/components/parameters/TeamId'
       responses:
@@ -304,11 +308,11 @@ components:
         title:
           description: The name of the Marvel team.
           type: string
-#          example: Guardians of the Galaxy
+          # example: Guardians of the Galaxy
         description:
           description: A brief description of the Marvel team.
           type: string
-#          example: Interstellar heroes protecting the galaxy
+          # example: Interstellar heroes protecting the galaxy
           nullable: true
       additionalProperties: false
       required:

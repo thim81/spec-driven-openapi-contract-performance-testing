@@ -7,4 +7,5 @@ npm-debug.log
 .DS_Store
 *.zip
 /sdk/kiota/vendor/
+/sdk/orval/node_modules/*
 /_tmp/*

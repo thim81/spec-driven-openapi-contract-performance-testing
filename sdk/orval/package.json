@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "orval": "^7.1.0"
+  },
+  "scripts": {
+    "generate-react-client": "orval --config ./orval.config.js"
+  }
+}

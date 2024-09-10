@@ -1,0 +1,25 @@
+{
+    "output": "marvel.openapi.yaml",
+    "filterSet": {
+        "flags": [
+            "x-exclude"
+        ],
+        "flagValues": [],
+        "tags": [],
+        "methods": [
+            "GET"
+        ],
+        "operationIds": [],
+        "unusedComponents": [
+            "schemas",
+            "parameters",
+            "examples",
+            "headers",
+            "requestBodies",
+            "responses"
+        ],
+        "stripFlags": [
+            "x-exclude"
+        ]
+    }
+}

@@ -10,7 +10,7 @@
   "author": "Tim Haselaars",
   "license": "ISC",
   "dependencies": {
-    "@stoplight/spectral-cli": "^6.11.1",
+    "@stoplight/spectral-cli": "^6.13.0",
     "@redocly/cli": "^1.25.2",
     "openapi-examples-validator": "^5.0.0"
   }

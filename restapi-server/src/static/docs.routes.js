@@ -23,6 +23,11 @@ router.get('/swagger', function (req, res) {
   res.sendFile(filePath);
 });
 
+router.get('/stoplight', function (req, res) {
+  const filePath = path.join(__dirname, '../../public/docs/stoplight/index.html');
+  res.sendFile(filePath);
+});
+
 router.get('/openapi', function (req, res) {
   const filePath = path.join(__dirname, '../../../openapi.yml');
   res.sendFile(filePath);

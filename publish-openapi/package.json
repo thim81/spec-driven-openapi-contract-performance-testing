@@ -12,6 +12,6 @@
   "author": "Tim Haselaars",
   "license": "ISC",
   "dependencies": {
-    "openapi-format": "^1.23.1"
+    "openapi-format": "^1.23.2"
   }
 }

@@ -12,6 +12,6 @@
   "dependencies": {
     "@stoplight/spectral-cli": "^6.14.2",
     "@redocly/cli": "^1.25.11",
-    "openapi-examples-validator": "^5.0.0"
+    "openapi-examples-validator": "^6.0.1"
   }
 }

@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@stoplight/spectral-cli": "^6.14.2",
-    "@redocly/cli": "^1.28.0",
+    "@redocly/cli": "^1.28.5",
     "openapi-examples-validator": "^6.0.1"
   }
 }

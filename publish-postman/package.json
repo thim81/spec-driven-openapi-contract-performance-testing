@@ -9,6 +9,6 @@
   "author": "Tim Haselaars",
   "license": "ISC",
   "dependencies": {
-    "@apideck/portman": "^1.32.1"
+    "@apideck/portman": "^1.33.0"
   }
 }

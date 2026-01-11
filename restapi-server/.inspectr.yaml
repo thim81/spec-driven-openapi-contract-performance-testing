@@ -1,0 +1,20 @@
+# Inspectr configuration for the Marvel REST API Server
+# Docs: https://inspectr.dev/docs/
+
+# Inspectr listens on this address/port (clients call this)
+listen: ':3004'
+
+# The actual backend server address (started via `command` below)
+backend: 'http://localhost:3005'
+
+# tunnel
+expose: true
+channel: 'marvel-api'
+channelCode: 'marvel-api'
+
+# Start the backend server when Inspectr boots
+# (We run it on 3005 so Inspectr can listen on 3004)
+command: 'sh'
+commandArgs:
+  - '-c'
+  - 'PORT=3005 node src/index.js'

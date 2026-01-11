@@ -10,6 +10,7 @@
     "reset": "prisma migrate reset --force",
     "seed": "prisma db seed",
     "server-start": "prisma migrate deploy && node src/index.js",
+    "server-inspectr": "prisma migrate deploy && npx @inspectr/inspectr",
     "server-watch": "node --watch src/index.js"
   },
   "prisma": {

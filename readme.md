@@ -27,6 +27,18 @@ Per folder, you can find a `package.json` file which contains the tools & script
 The REST API Server can be started in the folder "restapi-server" by running `npm run server-start`.
 It is a simple NodeJS/Express/Prisma API server using SQLite. It provides a full CRUD API for managing Marvel characters, teams & movies.
 
+#### Inspecting traffic with Inspectr.dev
+
+The REST API Server is integrated with [Inspectr.dev](https://inspectr.dev).
+
+You can start the server **through Inspectr** by running `npm run server-inspectr` in the `restapi-server` folder.
+
+Inspectr will:
+- tunnel the traffic to your local machine on https://marvel-api.inspectr.dev
+- listen on **http://localhost:3004** (so your clients keep using the same port)
+- start the backend server on **http://localhost:3005** via the `command` configured in `.inspectr.yaml`
+- Visualise all requests in the Inspectr App UI on **http://localhost:4004**
+
 ## Publish documentation
 
 Examples for using Redoc, Swagger UI, Scalar can be found in the folder "restapi-server/public/docs".

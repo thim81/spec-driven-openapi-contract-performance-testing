@@ -15,7 +15,7 @@ import reportRoutes from "./static/report.routes.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const port = 3004
+const port = Number.parseInt(process.env.PORT ?? '3004', 10)
 
 const app = new express();
 

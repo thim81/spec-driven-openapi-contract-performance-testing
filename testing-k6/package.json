@@ -20,7 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "@apideck/portman": "^1.34.0",
-    "@apideck/postman-to-k6": "^1.14.1",
+    "@apideck/postman-to-k6": "^1.14.2",
     "k6-html-reporter": "^1.0.5"
   }
 }

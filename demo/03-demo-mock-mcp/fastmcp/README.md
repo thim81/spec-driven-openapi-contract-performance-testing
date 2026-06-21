@@ -39,10 +39,11 @@ process running, then copy the `npx mcp-remote` entry from
 `claude-desktop.example.json` into the Claude Desktop configuration.
 `mcp-remote` is configured with `http-only`, so it will not fall back to SSE.
 
-Set `MARVEL_API_BASE_URL` before starting FastMCP when the REST API is not
-available at `http://127.0.0.1:2007`. Use `MARVEL_MCP_HOST` and
-`MARVEL_MCP_PORT` only when running `server.py` directly; the npm command sets
-the host and port through FastMCP's CLI.
+FastMCP defaults to the REST Inspectr proxy at `http://127.0.0.1:3007`.
+`MARVEL_API_BASE_URL` can override that address. Start the REST Inspectr
+configuration with `npm run inspect` before invoking MCP tools. Use
+`MARVEL_MCP_HOST` and `MARVEL_MCP_PORT` only when running `server.py` directly;
+the npm command sets the MCP host and port through FastMCP's CLI.
 
 ## Inspect MCP requests
 

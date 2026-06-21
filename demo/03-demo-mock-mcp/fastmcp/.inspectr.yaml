@@ -15,4 +15,6 @@ print: true
 storeInMemory: true
 
 # Keep MCP traffic local for the desktop demo.
-expose: false
+expose: true
+channel: 'marvel-mcp'
+channelCode: 'marvel-mcp-123'

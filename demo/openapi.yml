@@ -16,7 +16,7 @@ paths:
       operationId: getApiInfo
       summary: Get API information
       description: Return the API name and version.
-      security: [ ]
+      security: []
       responses:
         '200':
           description: API information
@@ -434,7 +434,7 @@ components:
       type: object
       properties:
         id:
-          description: ID of the Marvel characte fr
+          description: ID of the Marvel character
           type: integer
           format: int64
           example: 1
@@ -508,24 +508,25 @@ components:
           items:
             $ref: '#/components/schemas/MarvelCharacterModel'
           example:
-            - id: 1
-              name: Iron Man
-              first_name: Tony
-              last_name: Stark
-              description: 'Genius, billionaire, playboy, philanthropist.'
-              powers:
-                - Superhuman strength
-                - Powered armor suit
-                - Genius-level intellect
-            - id: 2
-              name: Spider-Man
-              first_name: Peter
-              last_name: Parker
-              description: Friendly neighborhood superhero.
-              powers:
-                - Wall-crawling
-                - Spider-sense
-                - Web-shooters
+            heroes: # Wrong - Remove heroes and indent
+              - id: 1
+                name: Iron Man
+                first_name: Tony
+                last_name: Stark
+                description: 'Genius, billionaire, playboy, philanthropist.'
+                powers:
+                  - Superhuman strength
+                  - Powered armor suit
+                  - Genius-level intellect
+              - id: 2
+                name: Spider-Man
+                first_name: Peter
+                last_name: Parker
+                description: Friendly neighborhood superhero.
+                powers:
+                  - Wall-crawling
+                  - Spider-sense
+                  - Web-shooters
         pagination:
           $ref: '#/components/schemas/PaginationModel'
     MoviesResponse:

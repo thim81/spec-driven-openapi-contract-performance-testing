@@ -1,0 +1,13 @@
+{
+  "name": "02-demo-mock-contract",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "mock": "inspectr",
+    "mcp:bump": "bump deploy config/bump-flower-mcp.yml --mcp-server marvel-mcp --token 8y2qRsiUcudHG9UtdUdaAx718XdtyPtC"
+  },
+  "devDependencies": {
+    "@inspectr/inspectr": "^1.9.1",
+    "bump-cli": "latest",
+  }
+}

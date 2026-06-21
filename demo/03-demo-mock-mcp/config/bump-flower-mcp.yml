@@ -1,0 +1,108 @@
+flower: "0.1"
+id: marvel-appearance-api
+title: Marvel Appearance API
+# Flower workflow set for exposing the appearance-focused OpenAPI operations as MCP tools.
+# Use a reachable API URL for base_url. For a local live demo this can point to your Prism/mock server.
+
+flows:
+  - id: get_heroes
+    description: Get a paginated list of Marvel heroes
+    inputs:
+      properties:
+        base_url:
+          type: string
+          description: Base URL of the Marvel API
+          default: https://marvel-api-mock.in-spectr.dev
+        page:
+          type: number
+          description: Page number
+          default: 1
+        limit:
+          type: number
+          description: Number of items per page
+          default: 10
+    steps:
+      - id: get_heroes
+        request:
+          method: GET
+          url:  https://marvel-api-mock.in-spectr.dev/heroes
+          headers:
+            Authorization: "Bearer Bearer demo-token"
+          query:
+            page: $inputs.page
+            limit: $inputs.limit
+        outputs:
+          heroes: $response.body.heroes
+          pagination: $response.body.pagination
+          error: $response.body.error
+    outputs:
+      heroes: $steps.get_heroes.outputs.heroes
+      pagination: $steps.get_heroes.outputs.pagination
+      error: $steps.get_heroes.outputs.error
+
+  - id: get_hero
+    description: Get a Marvel hero by ID
+    inputs:
+      properties:
+        base_url:
+          type: string
+          description: Base URL of the Marvel API
+          default: https://marvel-api-mock.in-spectr.dev
+        heroId:
+          type: number
+          description: ID of the Marvel hero
+      required:
+        - heroId
+    steps:
+      - id: get_hero
+        request:
+          method: GET
+          url:  https://marvel-api-mock.in-spectr.dev/heroes/$inputs.heroId
+          headers:
+            Authorization: "Bearer Bearer demo-token"
+        outputs:
+          hero: $response.body
+          error: $response.body.error
+    outputs:
+      hero: $steps.get_hero.outputs.hero
+      error: $steps.get_hero.outputs.error
+
+  - id: get_hero_appearances
+    description: Get movie appearances for a Marvel hero
+    inputs:
+      properties:
+        base_url:
+          type: string
+          description: Base URL of the Marvel API
+          default: https://marvel-api-mock.in-spectr.dev
+        heroId:
+          type: number
+          description: ID of the Marvel hero
+        page:
+          type: number
+          description: Page number
+          default: 1
+        limit:
+          type: number
+          description: Number of items per page
+          default: 10
+      required:
+        - heroId
+    steps:
+      - id: get_hero_appearances
+        request:
+          method: GET
+          url:  https://marvel-api-mock.in-spectr.dev/heroes/$inputs.heroId/appearances
+          headers:
+            Authorization: "Bearer Bearer demo-token"
+          query:
+            page: $inputs.page
+            limit: $inputs.limit
+        outputs:
+          appearances: $response.body.appearances
+          pagination: $response.body.pagination
+          error: $response.body.error
+    outputs:
+      appearances: $steps.get_hero_appearances.outputs.appearances
+      pagination: $steps.get_hero_appearances.outputs.pagination
+      error: $steps.get_hero_appearances.outputs.error

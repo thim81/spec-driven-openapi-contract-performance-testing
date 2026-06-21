@@ -10,8 +10,6 @@ servers:
     description: Local
   - url: 'http://localhost:3005'
     description: Mock
-  - url: 'https://api-b6feef562ff3.deltablue.io/api'
-    description: Production
 paths:
   /:
     get:
@@ -223,6 +221,41 @@ paths:
                     release_year: 2011
                     director: Joe Johnston
                     description: Steve Rogers becomes Captain America during World War II.
+                  - id: 7
+                    title: Iron Man 2
+                    release_year: 2010
+                    director: Jon Favreau
+                    description: Tony Stark faces pressure to share his armor technology while confronting new enemies.
+                  - id: 8
+                    title: Iron Man 3
+                    release_year: 2013
+                    director: Shane Black
+                    description: Tony Stark confronts the Mandarin and rebuilds after a devastating attack.
+                  - id: 9
+                    title: Spider-Man 2
+                    release_year: 2004
+                    director: Sam Raimi
+                    description: Peter Parker struggles with his responsibilities while facing Doctor Octopus.
+                  - id: 10
+                    title: Spider-Man 3
+                    release_year: 2007
+                    director: Sam Raimi
+                    description: Spider-Man battles Sandman, Venom, and the darker side of his own powers.
+                  - id: 11
+                    title: 'Spider-Man: Homecoming'
+                    release_year: 2017
+                    director: Jon Watts
+                    description: Peter Parker balances high school life with becoming a neighborhood hero.
+                  - id: 12
+                    title: 'Spider-Man: Far From Home'
+                    release_year: 2019
+                    director: Jon Watts
+                    description: Peter Parker encounters Mysterio during a school trip across Europe.
+                  - id: 13
+                    title: 'Spider-Man: No Way Home'
+                    release_year: 2021
+                    director: Jon Watts
+                    description: A spell exposes Peter Parker to villains and heroes from across the multiverse.
         '400':
           description: Bad request
           content:
@@ -264,6 +297,20 @@ paths:
                   release_year: 2018
                   director: Ryan Coogler
                   description: T'Challa returns to Wakanda to take his place as king and protector.
+              ironMan2:
+                summary: Iron Man 2
+                value:
+                  title: Iron Man 2
+                  release_year: 2010
+                  director: Jon Favreau
+                  description: Tony Stark faces pressure to share his armor technology while confronting new enemies.
+              spiderManNoWayHome:
+                summary: 'Spider-Man: No Way Home'
+                value:
+                  title: 'Spider-Man: No Way Home'
+                  release_year: 2021
+                  director: Jon Watts
+                  description: A spell exposes Peter Parker to villains and heroes from across the multiverse.
       responses:
         '201':
           description: Successfully created
@@ -319,6 +366,22 @@ paths:
                     release_year: 2014
                     director: James Gunn
                     description: A group of intergalactic outlaws joins forces to protect the galaxy.
+                ironMan3:
+                  summary: Iron Man 3
+                  value:
+                    id: 8
+                    title: Iron Man 3
+                    release_year: 2013
+                    director: Shane Black
+                    description: Tony Stark confronts the Mandarin and rebuilds after a devastating attack.
+                spiderManNoWayHome:
+                  summary: 'Spider-Man: No Way Home'
+                  value:
+                    id: 13
+                    title: 'Spider-Man: No Way Home'
+                    release_year: 2021
+                    director: Jon Watts
+                    description: A spell exposes Peter Parker to villains and heroes from across the multiverse.
         '404':
           description: Marvel movie not found
           content:

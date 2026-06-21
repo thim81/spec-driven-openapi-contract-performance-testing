@@ -4,8 +4,8 @@ import { fileURLToPath } from 'node:url';
 import { createApp } from './app.mjs';
 import { createDatabase } from './database.mjs';
 
-const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const databasePath = process.env.SQLITE_PATH ?? resolve(projectRoot, 'data/marvel.db');
+const demoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const databasePath = process.env.SQLITE_PATH ?? resolve(demoRoot, 'data/marvel.db');
 const host = process.env.HOST ?? '127.0.0.1';
 const port = Number.parseInt(process.env.PORT ?? '3077', 10);
 

@@ -31,7 +31,7 @@ test('returns API information', async () => {
   assert.equal(response.status, 200);
   assert.deepEqual(await response.json(), {
     api: 'Marvel Universe API',
-    version: '1.0.0'
+    version: '1.1.0'
   });
 });
 

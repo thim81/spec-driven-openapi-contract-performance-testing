@@ -9,9 +9,11 @@
   "scripts": {
     "inspect": "inspectr",
     "start": "npm run api",
-    "api": "node src/server.mjs",
-    "api:watch": "node --watch src/server.mjs",
-    "test": "node --test",
+    "api": "node rest-api/src/server.mjs",
+    "api:watch": "node --watch rest-api/src/server.mjs",
+    "mcp:fastmcp": "fastmcp/.venv/bin/python fastmcp/server.py",
+    "mcp:fastmcp:test": "fastmcp/.venv/bin/python fastmcp/test_tools.py",
+    "test": "node --test rest-api/test/api.test.mjs",
     "contract:generate": "portman --cliOptionsFile ./config/portman-cli-options.json --syncPostman true",
     "contract:test": "portman --cliOptionsFile ./config/portman-cli-options.json --runNewman true --syncPostman false",
     "mcp:bump": "bump deploy config/bump-flower-mcp.yml --mcp-server marvel-mcp --token 8y2qRsiUcudHG9UtdUdaAx718XdtyPtC"

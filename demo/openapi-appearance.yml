@@ -6,9 +6,7 @@ info:
   x-logo:
     url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/960px-Marvel_Logo.svg.png'
 servers:
-  - url: 'http://localhost:3004/api'
-    description: Local
-  - url: 'http://localhost:3005'
+  - url: 'https://marvel-api-mock.in-spectr.dev'
     description: Mock
 paths:
   /:
@@ -687,25 +685,24 @@ components:
           items:
             $ref: '#/components/schemas/MarvelCharacterModel'
           example:
-            heroes:
-              - id: 1
-                name: Iron Man
-                first_name: Tony
-                last_name: Stark
-                description: 'Genius, billionaire, playboy, philanthropist.'
-                powers:
-                  - Superhuman strength
-                  - Powered armor suit
-                  - Genius-level intellect
-              - id: 2
-                name: Spider-Man
-                first_name: Peter
-                last_name: Parker
-                description: Friendly neighborhood superhero.
-                powers:
-                  - Wall-crawling
-                  - Spider-sense
-                  - Web-shooters
+            - id: 1
+              name: Iron Man
+              first_name: Tony
+              last_name: Stark
+              description: 'Genius, billionaire, playboy, philanthropist.'
+              powers:
+                - Superhuman strength
+                - Powered armor suit
+                - Genius-level intellect
+            - id: 2
+              name: Spider-Man
+              first_name: Peter
+              last_name: Parker
+              description: Friendly neighborhood superhero.
+              powers:
+                - Wall-crawling
+                - Spider-sense
+                - Web-shooters
         pagination:
           $ref: '#/components/schemas/PaginationModel'
     MoviesResponse:
@@ -804,8 +801,8 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-security:
-  - bearerAuth: []
+security: []
+#  - bearerAuth: []
 tags:
   - name: Heroes
     description: Manage all Marvel heroes.

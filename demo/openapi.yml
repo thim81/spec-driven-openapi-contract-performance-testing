@@ -16,7 +16,7 @@ paths:
       operationId: getApiInfo
       summary: Get API information
       description: Return the API name and version.
-      security: []
+      security: [ ]
       responses:
         '200':
           description: API information
@@ -176,7 +176,7 @@ paths:
   /movies:
     get:
       operationId: getMovies
-#      x-exclude: true
+      #      x-exclude: true
       summary: Get all Marvel movies
       description: Retrieve a list of all Marvel movies that have been created.
       parameters:
@@ -266,7 +266,7 @@ paths:
         - Movies
     post:
       operationId: createMovie
-#      x-exclude: true
+      #      x-exclude: true
       summary: Create a new Marvel movie
       description: Create a Marvel movie and add it to the movie list.
       requestBody:
@@ -329,7 +329,7 @@ paths:
   '/movies/{movieId}':
     get:
       operationId: getMovie
-#      x-exclude: true
+      #      x-exclude: true
       summary: Get a Marvel movie
       description: Retrieve information about a specific Marvel movie.
       parameters:
@@ -434,7 +434,7 @@ components:
       type: object
       properties:
         id:
-          description: ID of the Marvel character
+          description: ID of the Marvel characte fr
           type: integer
           format: int64
           example: 1
@@ -508,25 +508,24 @@ components:
           items:
             $ref: '#/components/schemas/MarvelCharacterModel'
           example:
-            heroes:
-              - id: 1
-                name: Iron Man
-                first_name: Tony
-                last_name: Stark
-                description: 'Genius, billionaire, playboy, philanthropist.'
-                powers:
-                  - Superhuman strength
-                  - Powered armor suit
-                  - Genius-level intellect
-              - id: 2
-                name: Spider-Man
-                first_name: Peter
-                last_name: Parker
-                description: Friendly neighborhood superhero.
-                powers:
-                  - Wall-crawling
-                  - Spider-sense
-                  - Web-shooters
+            - id: 1
+              name: Iron Man
+              first_name: Tony
+              last_name: Stark
+              description: 'Genius, billionaire, playboy, philanthropist.'
+              powers:
+                - Superhuman strength
+                - Powered armor suit
+                - Genius-level intellect
+            - id: 2
+              name: Spider-Man
+              first_name: Peter
+              last_name: Parker
+              description: Friendly neighborhood superhero.
+              powers:
+                - Wall-crawling
+                - Spider-sense
+                - Web-shooters
         pagination:
           $ref: '#/components/schemas/PaginationModel'
     MoviesResponse:
@@ -616,7 +615,7 @@ components:
       type: http
       scheme: bearer
 security:
-  - bearerAuth: []
+  - bearerAuth: [ ]
 tags:
   - name: Heroes
     description: Manage all Marvel heroes.

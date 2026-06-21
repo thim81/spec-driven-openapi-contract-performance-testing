@@ -392,6 +392,144 @@ paths:
                 error: Marvel movie not found
       tags:
         - Movies
+  /appearances:
+    get:
+      operationId: getAppearances
+      summary: Get all Marvel appearances
+      description: Retrieve all links between Marvel heroes and movies.
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppearancesResponse'
+              example:
+                appearances:
+                  - id: 1
+                    hero_id: 1
+                    movie_id: 24
+                    role: lead
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+      tags:
+        - Appearances
+    post:
+      operationId: createAppearance
+      summary: Create a Marvel appearance
+      description: Link a Marvel hero to a movie with a specific role.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppearanceModel'
+            example:
+              hero_id: 1
+              movie_id: 24
+              role: lead
+      responses:
+        '201':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppearanceModel'
+              example:
+                id: 1
+                hero_id: 1
+                movie_id: 24
+                role: lead
+        '422':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityError'
+      tags:
+        - Appearances
+  '/appearances/{appearanceId}':
+    get:
+      operationId: getAppearance
+      summary: Get a Marvel appearance
+      description: Retrieve a specific link between a Marvel hero and movie.
+      parameters:
+        - $ref: '#/components/parameters/AppearanceId'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppearanceModel'
+              example:
+                id: 1
+                hero_id: 1
+                movie_id: 24
+                role: lead
+        '404':
+          description: Marvel appearance not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+              example:
+                error: Marvel appearance not found
+      tags:
+        - Appearances
+  '/heroes/{heroId}/appearances':
+    get:
+      operationId: getHeroAppearances
+      summary: Get appearances for a Marvel hero
+      description: Retrieve all movie appearances for a specific Marvel hero.
+      parameters:
+        - $ref: '#/components/parameters/HeroId'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppearancesResponse'
+              example:
+                appearances:
+                  - id: 1
+                    hero_id: 1
+                    movie_id: 1
+                    role: main-character
+                  - id: 2
+                    hero_id: 1
+                    movie_id: 7
+                    role: lead
+                  - id: 3
+                    hero_id: 1
+                    movie_id: 8
+                    role: lead
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '404':
+          description: Marvel hero not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+              example:
+                error: Marvel hero not found
+      tags:
+        - Appearances
 components:
   parameters:
     HeroId:
@@ -407,6 +545,14 @@ components:
       in: path
       required: true
       description: ID of the Marvel movie
+      schema:
+        type: integer
+      example: 1
+    AppearanceId:
+      name: appearanceId
+      in: path
+      required: true
+      description: ID of the Marvel appearance
       schema:
         type: integer
       example: 1
@@ -499,6 +645,39 @@ components:
       required:
         - title
         - release_year
+    AppearanceModel:
+      description: A Marvel hero's appearance in a movie.
+      type: object
+      properties:
+        id:
+          description: ID of the Marvel appearance.
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        hero_id:
+          description: ID of the Marvel hero.
+          type: integer
+          format: int64
+          example: 1
+        movie_id:
+          description: ID of the Marvel movie.
+          type: integer
+          format: int64
+          example: 24
+        role:
+          description: The hero's role in the movie.
+          type: string
+          enum:
+            - lead
+            - supporting
+            - cameo
+          example: lead
+      additionalProperties: false
+      required:
+        - hero_id
+        - movie_id
+        - role
     HeroesResponse:
       type: object
       properties:
@@ -537,6 +716,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MarvelMovieModel'
+        pagination:
+          $ref: '#/components/schemas/PaginationModel'
+    AppearancesResponse:
+      type: object
+      properties:
+        appearances:
+          description: List of Marvel hero appearances in movies.
+          type: array
+          items:
+            $ref: '#/components/schemas/AppearanceModel'
         pagination:
           $ref: '#/components/schemas/PaginationModel'
     PaginationModel:
@@ -623,3 +812,5 @@ tags:
   - name: Movies
     description: Manage all movies from the Marvel Universe.
 #    x-exclude: true
+  - name: Appearances
+    description: Manage links between Marvel heroes and movies.

@@ -6,13 +6,17 @@
   "scripts": {
     "start": "npm run preview",
     "preview": "node server.js",
+    "mock": "inspectr",
     "preview:redocly": "redocly preview-docs ../openapi.yml",
     "preview:scalar": "scalar document serve ../openapi.yml --watch",
     "format": "openapi-format ../openapi.yml --output ../openapi_formatted.yml --keepComments",
-    "lint": "redocly lint ../openapi.yml"
+    "lint": "redocly lint ../openapi.yml",
+    "contract:generate": "portman --cliOptionsFile ./config/portman-cli-options.json --syncPostman true"
   },
   "devDependencies": {
-    "@redocly/cli": "^1.25.3",
+    "@apideck/portman": "^1.35.0",
+    "@inspectr/inspectr": "^1.9.1",
+    "@redocly/cli": "^2.34.0",
     "@scalar/cli": "^2.0.0",
     "openapi-format": "^1.33.1",
     "yaml": "^2.9.0"

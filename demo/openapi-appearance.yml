@@ -409,7 +409,19 @@ paths:
                 appearances:
                   - id: 1
                     hero_id: 1
-                    movie_id: 24
+                    movie_id: 1
+                    role: lead
+                  - id: 2
+                    hero_id: 2
+                    movie_id: 2
+                    role: lead
+                  - id: 3
+                    hero_id: 1
+                    movie_id: 7
+                    role: lead
+                  - id: 4
+                    hero_id: 1
+                    movie_id: 8
                     role: lead
         '400':
           description: Bad request
@@ -431,7 +443,7 @@ paths:
               $ref: '#/components/schemas/AppearanceModel'
             example:
               hero_id: 1
-              movie_id: 24
+              movie_id: 1
               role: lead
       responses:
         '201':
@@ -443,7 +455,7 @@ paths:
               example:
                 id: 1
                 hero_id: 1
-                movie_id: 24
+                movie_id: 1
                 role: lead
         '422':
           description: Bad Request
@@ -470,7 +482,7 @@ paths:
               example:
                 id: 1
                 hero_id: 1
-                movie_id: 24
+                movie_id: 1
                 role: lead
         '404':
           description: Marvel appearance not found
@@ -504,11 +516,11 @@ paths:
                     hero_id: 1
                     movie_id: 1
                     role: main-character
-                  - id: 2
+                  - id: 3
                     hero_id: 1
                     movie_id: 7
                     role: lead
-                  - id: 3
+                  - id: 4
                     hero_id: 1
                     movie_id: 8
                     role: lead
@@ -620,7 +632,7 @@ components:
           description: ID of the Marvel movie.
           type: integer
           format: int64
-          example: ABC # TODO
+          example: 1
           readOnly: true
         title:
           description: The title of the Marvel movie.
@@ -662,7 +674,7 @@ components:
           description: ID of the Marvel movie.
           type: integer
           format: int64
-          example: 24
+          example: 1
         role:
           description: The hero's role in the movie.
           type: string

@@ -3,16 +3,27 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
   "scripts": {
-    "mock": "inspectr",
-    "mcp:bump": "bump deploy config/bump-flower-mcp.yml --mcp-server marvel-mcp --token \"$BUMP_TOKEN\""
+    "inspect": "inspectr",
+    "start": "npm run api",
+    "api": "node src/server.mjs",
+    "api:watch": "node --watch src/server.mjs",
+    "test": "node --test",
+    "contract:generate": "portman --cliOptionsFile ./config/portman-cli-options.json --syncPostman true",
+    "contract:test": "portman --cliOptionsFile ./config/portman-cli-options.json --runNewman true --syncPostman false",
+    "mcp:bump": "bump deploy config/bump-flower-mcp.yml --mcp-server marvel-mcp --token 8y2qRsiUcudHG9UtdUdaAx718XdtyPtC"
   },
   "devDependencies": {
+    "@apideck/portman": "^1.35.0",
     "@inspectr/inspectr": "^1.9.1",
     "bump-cli": "latest"
   },
   "dependencies": {
     "@ivotoby/openapi-mcp-server": "^1.16.1",
-    "@modelcontextprotocol/sdk": "^1.29.0"
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "express": "^4.22.2"
   }
 }

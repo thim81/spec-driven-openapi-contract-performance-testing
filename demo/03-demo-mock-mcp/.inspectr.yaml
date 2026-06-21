@@ -1,15 +1,18 @@
-# Inspectr mock service generated from the shared demo OpenAPI document.
-listen: ':3006'
-mockBackend: '../openapi-appearance.yml'
-mockDynamic: false
+# Inspectr proxy for the SQLite-backed API service.
+listen: ':3007'
+backend: 'http://127.0.0.1:3077'
+command: 'npm'
+commandArgs:
+  - 'run'
+  - 'api'
 
 # Inspectr application and request log.
 app: true
-appPort: '4006'
+appPort: '4007'
 print: true
 storeInMemory: true
 
 # Public tunnel configuration.
 expose: true
-channel: 'marvel-api-mock'
-channelCode: 'marvel-api-mock'
+channel: 'marvel-api'
+channelCode: 'marvel-api-123'

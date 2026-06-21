@@ -12,7 +12,7 @@ flows:
         base_url:
           type: string
           description: Base URL of the Marvel API
-          default: https://marvel-api-mock.in-spectr.dev
+          default: https://marvel-api.in-spectr.dev
         page:
           type: number
           description: Page number
@@ -25,7 +25,7 @@ flows:
       - id: get_heroes
         request:
           method: GET
-          url:  https://marvel-api-mock.in-spectr.dev/heroes
+          url:  https://marvel-api.in-spectr.dev/heroes
           headers:
             Authorization: "Bearer Bearer demo-token"
           query:
@@ -47,7 +47,7 @@ flows:
         base_url:
           type: string
           description: Base URL of the Marvel API
-          default: https://marvel-api-mock.in-spectr.dev
+          default: https://marvel-api.in-spectr.dev
         heroId:
           type: number
           description: ID of the Marvel hero
@@ -57,7 +57,7 @@ flows:
       - id: get_hero
         request:
           method: GET
-          url:  https://marvel-api-mock.in-spectr.dev/heroes/$inputs.heroId
+          url:  https://marvel-api.in-spectr.dev/heroes/$inputs.heroId
           headers:
             Authorization: "Bearer Bearer demo-token"
         outputs:
@@ -74,7 +74,7 @@ flows:
         base_url:
           type: string
           description: Base URL of the Marvel API
-          default: https://marvel-api-mock.in-spectr.dev
+          default: https://marvel-api.in-spectr.dev
         heroId:
           type: number
           description: ID of the Marvel hero
@@ -92,7 +92,7 @@ flows:
       - id: get_hero_appearances
         request:
           method: GET
-          url:  https://marvel-api-mock.in-spectr.dev/heroes/$inputs.heroId/appearances
+          url:  https://marvel-api.in-spectr.dev/heroes/$inputs.heroId/appearances
           headers:
             Authorization: "Bearer Bearer demo-token"
           query:

@@ -1,2 +1,5 @@
 marvel.postman.json
 .env
+.inspectr/
+data/*.db
+data/*.db-*

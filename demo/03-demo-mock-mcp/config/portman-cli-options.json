@@ -1,0 +1,11 @@
+{
+  "local": "../openapi-appearance.yml",
+  "baseUrl": "https://marvel-api.in-spectr.dev",
+  "output": "./marvel.postman.json",
+  "portmanConfigFile": "./config/portman-config.yaml",
+  "filterFile": "./config/portman-filter.yaml",
+  "newmanOptionsFile": "./config/newman-options.json",
+  "includeTests": true,
+  "syncPostman": false,
+  "collectionName": "Marvel Universe API - REST - PHP Antwerp"
+}

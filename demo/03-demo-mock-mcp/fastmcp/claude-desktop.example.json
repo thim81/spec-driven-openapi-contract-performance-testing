@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "marvel-fastmcp": {
+      "command": "/Users/thim/Sites/marvel-api/demo/03-demo-mock-mcp/fastmcp/.venv/bin/python",
+      "args": [
+        "/Users/thim/Sites/marvel-api/demo/03-demo-mock-mcp/fastmcp/server.py"
+      ],
+      "env": {
+        "MARVEL_API_BASE_URL": "http://127.0.0.1:2007"
+      }
+    }
+  }
+}

@@ -254,6 +254,16 @@ paths:
                     release_year: 2021
                     director: Jon Watts
                     description: A spell exposes Peter Parker to villains and heroes from across the multiverse.
+                  - id: 14
+                    title: 'Avengers: Infinity War'
+                    release_year: 2018
+                    director: Anthony Russo and Joe Russo
+                    description: The Avengers and their allies unite to stop Thanos from collecting the Infinity Stones.
+                  - id: 15
+                    title: 'Avengers: Endgame'
+                    release_year: 2019
+                    director: Anthony Russo and Joe Russo
+                    description: The surviving Avengers attempt to reverse the devastation caused by Thanos.
         '400':
           description: Bad request
           content:
@@ -309,6 +319,20 @@ paths:
                   release_year: 2021
                   director: Jon Watts
                   description: A spell exposes Peter Parker to villains and heroes from across the multiverse.
+              infinityWar:
+                summary: 'Avengers: Infinity War'
+                value:
+                  title: 'Avengers: Infinity War'
+                  release_year: 2018
+                  director: Anthony Russo and Joe Russo
+                  description: The Avengers and their allies unite to stop Thanos from collecting the Infinity Stones.
+              endgame:
+                summary: 'Avengers: Endgame'
+                value:
+                  title: 'Avengers: Endgame'
+                  release_year: 2019
+                  director: Anthony Russo and Joe Russo
+                  description: The surviving Avengers attempt to reverse the devastation caused by Thanos.
       responses:
         '201':
           description: Successfully created
@@ -380,6 +404,22 @@ paths:
                     release_year: 2021
                     director: Jon Watts
                     description: A spell exposes Peter Parker to villains and heroes from across the multiverse.
+                infinityWar:
+                  summary: 'Avengers: Infinity War'
+                  value:
+                    id: 14
+                    title: 'Avengers: Infinity War'
+                    release_year: 2018
+                    director: Anthony Russo and Joe Russo
+                    description: The Avengers and their allies unite to stop Thanos from collecting the Infinity Stones.
+                endgame:
+                  summary: 'Avengers: Endgame'
+                  value:
+                    id: 15
+                    title: 'Avengers: Endgame'
+                    release_year: 2019
+                    director: Anthony Russo and Joe Russo
+                    description: The surviving Avengers attempt to reverse the devastation caused by Thanos.
         '404':
           description: Marvel movie not found
           content:
@@ -423,6 +463,22 @@ paths:
                     hero_id: 1
                     movie_id: 8
                     role: lead
+                  - id: 5
+                    hero_id: 1
+                    movie_id: 14
+                    role: lead
+                  - id: 6
+                    hero_id: 2
+                    movie_id: 14
+                    role: supporting
+                  - id: 7
+                    hero_id: 1
+                    movie_id: 15
+                    role: lead
+                  - id: 8
+                    hero_id: 2
+                    movie_id: 15
+                    role: cameo
         '400':
           description: Bad request
           content:
@@ -523,6 +579,14 @@ paths:
                   - id: 4
                     hero_id: 1
                     movie_id: 8
+                    role: lead
+                  - id: 5
+                    hero_id: 1
+                    movie_id: 14
+                    role: lead
+                  - id: 7
+                    hero_id: 1
+                    movie_id: 15
                     role: lead
         '400':
           description: Bad request
@@ -747,7 +811,7 @@ components:
             total:
               description: The total number of items for the requested resource.
               type: integer
-              example: 100
+              example: 10
             current_page:
               description: The current page number.
               type: integer

@@ -175,12 +175,11 @@ paths:
                 $ref: '#/components/schemas/NotFoundError'
       tags:
         - Heroes
-  /teams:
+  /movies:
     get:
-      operationId: getHeroes # TODO
-      x-exclude: true
-      summary: Get all Marvel teams
-      description: Retrieve a list of all Marvel teams.
+      operationId: getMovies
+      summary: Get all Marvel movies
+      description: Retrieve a list of all Marvel movies that have been created.
       parameters:
         - $ref: '#/components/parameters/PageParam'
         - $ref: '#/components/parameters/LimitParam'
@@ -190,28 +189,49 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TeamsResponse'
-#              example:
+                $ref: '#/components/schemas/MoviesResponse'
+              example:
+                movies:
+                  - id: 1
+                    title: Iron Man
+                    release_year: 2008
+                    director: Jon Favreau
+                    description: Tony Stark builds an armored suit and becomes Iron Man.
+                  - id: 2
+                    title: Spider-Man
+                    release_year: 2002
+                    director: Sam Raimi
+                    description: Peter Parker becomes Spider-Man after being bitten by a genetically modified spider.
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
       tags:
-        - Teams
+        - Movies
     post:
-      operationId: postTeams
-      x-exclude: true
-      summary: Create a new Marvel team
-      description: Endpoint to create a new Marvel team.
+      operationId: createMovie
+      summary: Create a new Marvel movie
+      description: Create a Marvel movie and add it to the movie list.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MarvelTeamModel'
+              $ref: '#/components/schemas/MarvelMovieModel'
+            example:
+              title: Iron Man
+              release_year: 2008
+              director: Jon Favreau
+              description: Tony Stark builds an armored suit and becomes Iron Man.
       responses:
         '201':
           description: Successfully created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MarvelTeamModel'
+                $ref: '#/components/schemas/MarvelMovieModel'
         '422':
           description: Bad Request
           content:
@@ -219,30 +239,37 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
-        - Teams
-  '/teams/{id}':
+        - Movies
+  '/movies/{movieId}':
     get:
-      operationId: getHero
-      x-exclude: true
-      summary: Get a Marvel team
-      # description: Retrieve information about a specific Marvel team,
+      operationId: getMovie
+      summary: Get a Marvel movie
+      description: Retrieve information about a specific Marvel movie.
       parameters:
-        - $ref: '#/components/parameters/TeamId'
+        - $ref: '#/components/parameters/MovieId'
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MarvelTeamModel'
+                $ref: '#/components/schemas/MarvelMovieModel'
+              example:
+                id: 1
+                title: Iron Man
+                release_year: 2008
+                director: Jon Favreau
+                description: Tony Stark builds an armored suit and becomes Iron Man.
         '404':
-          description: Marvel team not found
+          description: Marvel movie not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundError'
+              example:
+                error: Marvel movie not found
       tags:
-        - Teams
+        - Movies
 components:
   parameters:
     HeroId:
@@ -253,11 +280,11 @@ components:
       schema:
         type: integer
       example: 1
-    TeamId:
-      name: id
+    MovieId:
+      name: movieId
       in: path
       required: true
-      description: ID of the Marvel team
+      description: ID of the Marvel movie
       schema:
         type: integer
       example: 1
@@ -319,29 +346,37 @@ components:
       additionalProperties: false
       required:
         - name
-    MarvelTeamModel:
-      description: A Marvel team.
+    MarvelMovieModel:
+      description: A Marvel movie.
       type: object
       properties:
         id:
-          description: ID of the Marvel team
+          description: ID of the Marvel movie.
           type: integer
           format: int64
-          example: ABC
+          example: 1
           readOnly: true
         title:
-          description: The name of the Marvel team.
+          description: The title of the Marvel movie.
           type: string
-          # example: Guardians of the Galaxy
+          example: Iron Man
+        release_year:
+          description: The year the movie was released.
+          type: integer
+          example: 2008
+        director:
+          description: The director of the Marvel movie.
+          type: string
+          example: Jon Favreau
         description:
-          description: A brief description of the Marvel team.
+          description: A brief description of the Marvel movie.
           type: string
-          # example: Interstellar heroes protecting the galaxy
+          example: Tony Stark builds an armored suit and becomes Iron Man.
           nullable: true
       additionalProperties: false
       required:
-        - name
-        - description
+        - title
+        - release_year
     HeroesResponse:
       type: object
       properties:
@@ -372,14 +407,14 @@ components:
                   - Web-shooters
         pagination:
           $ref: '#/components/schemas/PaginationModel'
-    TeamsResponse:
+    MoviesResponse:
       type: object
       properties:
-        teams:
-          description: List of Marvel teams.
+        movies:
+          description: List of Marvel movies.
           type: array
           items:
-            $ref: '#/components/schemas/MarvelTeamModel'
+            $ref: '#/components/schemas/MarvelMovieModel'
         pagination:
           $ref: '#/components/schemas/PaginationModel'
     PaginationModel:
@@ -463,6 +498,5 @@ security:
 tags:
   - name: Heroes
     description: Manage all Marvel heroes.
-  - name: Teams
-    description: Manage all teams from the Marvel Universe.
-    x-exclude: true
+  - name: Movies
+    description: Manage all movies from the Marvel Universe.

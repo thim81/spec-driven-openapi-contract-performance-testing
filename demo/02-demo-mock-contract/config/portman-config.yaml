@@ -24,7 +24,7 @@ tests:
   contentTests: []
 
 globals:
-  stripResponseExamples: false
+  stripResponseExamples: true
   variableCasing: camelCase
   securityOverwrites:
     bearer:

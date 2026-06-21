@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "mock": "inspectr",
-    "mock:local": "inspectr --expose=false",
-    "contract:generate": "portman --cliOptionsFile ./portman-cli-options.json --syncPostman false",
-    "contract:test": "portman --cliOptionsFile ./portman-cli-options.json --runNewman true --syncPostman false",
+    "contract:generate": "portman --cliOptionsFile ./config/portman-cli-options.json --syncPostman true",
+    "contract:test": "portman --cliOptionsFile ./config/portman-cli-options.json --runNewman true --syncPostman false",
     "test": "npm run contract:test"
   },
   "devDependencies": {

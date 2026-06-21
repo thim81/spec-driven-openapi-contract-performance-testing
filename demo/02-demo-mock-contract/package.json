@@ -4,12 +4,15 @@
   "private": true,
   "scripts": {
     "mock": "inspectr",
+    "lint:openapi": "redocly lint ../openapi-appearance.yml",
     "contract:generate": "portman --cliOptionsFile ./config/portman-cli-options.json --syncPostman true",
     "contract:test": "portman --cliOptionsFile ./config/portman-cli-options.json --runNewman true --syncPostman false",
     "test": "npm run contract:test"
   },
   "devDependencies": {
     "@apideck/portman": "^1.35.0",
-    "@inspectr/inspectr": "^1.9.1"
+    "@inspectr/inspectr": "^1.9.1",
+    "@redocly/cli": "^2.34.0",
+    "yaml": "^2.9.0"
   }
 }

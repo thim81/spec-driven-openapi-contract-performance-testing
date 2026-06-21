@@ -8,11 +8,13 @@
     "preview": "node server.js",
     "preview:redocly": "redocly preview-docs ../openapi.yml",
     "preview:scalar": "scalar document serve ../openapi.yml --watch",
+    "format": "openapi-format ../openapi.yml --output ../openapi_formatted.yml --keepComments",
     "lint": "redocly lint ../openapi.yml"
   },
   "devDependencies": {
     "@redocly/cli": "^1.25.3",
     "@scalar/cli": "^2.0.0",
+    "openapi-format": "^1.33.1",
     "yaml": "^2.9.0"
   }
 }

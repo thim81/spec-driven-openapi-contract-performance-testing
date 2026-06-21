@@ -1,0 +1,15 @@
+# Inspectr mock service generated from the shared demo OpenAPI document.
+listen: ':3005'
+mockBackend: '../openapi_start.yml'
+mockDynamic: true
+
+# Inspectr application and request log.
+app: true
+appPort: '4005'
+print: true
+storeInMemory: true
+
+# Public tunnel configuration.
+expose: true
+channel: 'marvel-api-mock'
+channelCode: 'marvel-api-mock'

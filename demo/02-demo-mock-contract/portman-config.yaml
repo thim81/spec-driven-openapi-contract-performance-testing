@@ -1,0 +1,31 @@
+version: 1
+
+tests:
+  contractTests:
+    - openApiOperation: '*::/*'
+      statusSuccess:
+        enabled: true
+    - openApiOperation: '*::/*'
+      responseTime:
+        enabled: true
+        maxMs: 1000
+    - openApiOperation: '*::/*'
+      contentType:
+        enabled: true
+    - openApiOperation: '*::/*'
+      jsonBody:
+        enabled: true
+    - openApiOperation: '*::/*'
+      schemaValidation:
+        enabled: true
+    - openApiOperation: '*::/*'
+      headersPresent:
+        enabled: true
+  contentTests: []
+
+globals:
+  stripResponseExamples: false
+  variableCasing: camelCase
+  securityOverwrites:
+    bearer:
+      token: demo-token

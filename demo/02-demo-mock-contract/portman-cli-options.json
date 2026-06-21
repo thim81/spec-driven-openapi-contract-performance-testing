@@ -1,0 +1,11 @@
+{
+  "local": "../openapi_start.yml",
+  "baseUrl": "http://127.0.0.1:3005",
+  "output": "./marvel-mock-contract.postman.json",
+  "portmanConfigFile": "./portman-config.yaml",
+  "filterFile": "./portman-filter.yaml",
+  "newmanOptionsFile": "./newman-options.json",
+  "includeTests": true,
+  "syncPostman": false,
+  "collectionName": "Marvel Universe API - Mock Contract Tests"
+}

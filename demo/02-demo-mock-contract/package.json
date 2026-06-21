@@ -1,0 +1,16 @@
+{
+  "name": "02-demo-mock-contract",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "mock": "inspectr",
+    "mock:local": "inspectr --expose=false",
+    "contract:generate": "portman --cliOptionsFile ./portman-cli-options.json --syncPostman false",
+    "contract:test": "portman --cliOptionsFile ./portman-cli-options.json --runNewman true --syncPostman false",
+    "test": "npm run contract:test"
+  },
+  "devDependencies": {
+    "@apideck/portman": "^1.35.0",
+    "@inspectr/inspectr": "^1.9.1"
+  }
+}

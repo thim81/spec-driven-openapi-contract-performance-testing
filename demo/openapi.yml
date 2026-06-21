@@ -13,11 +13,35 @@ servers:
   - url: 'https://api-b6feef562ff3.deltablue.io/api'
     description: Production
 paths:
-  /characters:
+  /:
     get:
-      operationId: getCharacters
-      summary: Get all Marvel characters
-      description: Retrieve a list of all Marvel characters.
+      operationId: getApiInfo
+      summary: Get API information
+      description: Return the API name and version.
+      security: []
+      responses:
+        '200':
+          description: API information
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - api
+                  - version
+                properties:
+                  api:
+                    type: string
+                    example: Marvel Universe API
+                  version:
+                    type: string
+                    example: 1.0.0
+  /heroes:
+    get:
+      operationId: getHeroes
+      summary: Get all Marvel heroes
+      description: Retrieve a list of all Marvel heroes.
       parameters:
         - $ref: '#/components/parameters/PageParam'
         - $ref: '#/components/parameters/LimitParam'
@@ -27,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CharactersResponse'
+                $ref: '#/components/schemas/HeroesResponse'
         '400':
           description: Bad request
           content:
@@ -35,11 +59,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestError'
       tags:
-        - Characters
+        - Heroes
     post:
-      operationId: postCharacters
-      summary: Create a new Marvel character
-      description: Endpoint to create a new Marvel character.
+      operationId: postHeroes
+      summary: Create a new Marvel hero
+      description: Endpoint to create a new Marvel hero.
       requestBody:
         required: true
         content:
@@ -69,14 +93,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
-        - Characters
-  '/characters/{id}':
+        - heroes
+  '/heroes/{id}':
     get:
-      operationId: getCharacter
-      summary: Get a Marvel character
-      description: Retrieve information about a specific Marvel character.
+      operationId: getHero
+      summary: Get a Marvel hero
+      description: Retrieve information about a specific Marvel hero.
       parameters:
-        - $ref: '#/components/parameters/CharacterId'
+        - $ref: '#/components/parameters/HeroId'
       responses:
         '200':
           description: Successful operation
@@ -85,19 +109,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/MarvelCharacterModel'
         '404':
-          description: Marvel character not found
+          description: Marvel hero not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundError'
       tags:
-        - Characters
+        - Heroes
     put:
-      operationId: putCharacter
-      summary: Update a Marvel character
-      description: Update information about a specific Marvel character.
+      operationId: putHero
+      summary: Update a Marvel hero
+      description: Update information about a specific Marvel hero.
       parameters:
-        - $ref: '#/components/parameters/CharacterId'
+        - $ref: '#/components/parameters/HeroId'
       requestBody:
         required: true
         content:
@@ -121,7 +145,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MarvelCharacterModel'
         '404':
-          description: Marvel character not found
+          description: Marvel hero not found
           content:
             application/json:
               schema:
@@ -133,27 +157,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
-        - Characters
+        - Heroes
     delete:
-      operationId: deleteCharacter
-      summary: Delete a Marvel character
-      description: Delete a specific Marvel character.
+      operationId: deleteHero
+      summary: Delete a Marvel hero
+      description: Delete a specific Marvel hero.
       parameters:
-        - $ref: '#/components/parameters/CharacterId'
+        - $ref: '#/components/parameters/HeroId'
       responses:
         '204':
           description: Successfully deleted
         '404':
-          description: Marvel character not found
+          description: Marvel hero not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundError'
       tags:
-        - Characters
+        - Heroes
   /teams:
     get:
-      operationId: getCharacters # TODO
+      operationId: getHeroes # TODO
       x-exclude: true
       summary: Get all Marvel teams
       description: Retrieve a list of all Marvel teams.
@@ -198,7 +222,7 @@ paths:
         - Teams
   '/teams/{id}':
     get:
-      operationId: getCharacter
+      operationId: getHero
       x-exclude: true
       summary: Get a Marvel team
       # description: Retrieve information about a specific Marvel team,
@@ -221,11 +245,11 @@ paths:
         - Teams
 components:
   parameters:
-    CharacterId:
+    HeroId:
       name: id
       in: path
       required: true
-      description: ID of the Marvel character
+      description: ID of the Marvel hero
       schema:
         type: integer
       example: 1
@@ -264,7 +288,7 @@ components:
           description: ID of the Marvel character
           type: integer
           format: int64
-          example: 7
+          example: 1
           readOnly: true
         name:
           description: The full name of the Marvel character.
@@ -318,16 +342,16 @@ components:
       required:
         - name
         - description
-    CharactersResponse:
+    HeroesResponse:
       type: object
       properties:
-        characters:
-          description: List of Marvel characters.
+        heroes:
+          description: List of Marvel heroes.
           type: array
           items:
             $ref: '#/components/schemas/MarvelCharacterModel'
           example:
-            characters:
+            heroes:
               - id: 1
                 name: Iron Man
                 first_name: Tony
@@ -429,7 +453,7 @@ components:
           description: Description of the error.
           type: string
       example:
-        error: Marvel character not found
+        error: Marvel hero not found
   securitySchemes:
     bearerAuth:
       type: http
@@ -437,8 +461,8 @@ components:
 security:
   - bearerAuth: []
 tags:
-  - name: Characters
-    description: Manage all Marvel characters.
+  - name: Heroes
+    description: Manage all Marvel heroes.
   - name: Teams
     description: Manage all teams from the Marvel Universe.
     x-exclude: true

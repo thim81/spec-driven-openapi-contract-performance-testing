@@ -9,3 +9,5 @@ npm-debug.log
 /sdk/kiota/vendor/
 /sdk/orval/node_modules/*
 /_tmp/*
+
+openapi_formatted.yml

@@ -93,7 +93,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
-        - heroes
+        - Heroes
   '/heroes/{heroId}':
     get:
       operationId: getHero
@@ -178,6 +178,7 @@ paths:
   /movies:
     get:
       operationId: getMovies
+      x-exclude: true
       summary: Get all Marvel movies
       description: Retrieve a list of all Marvel movies that have been created.
       parameters:
@@ -202,6 +203,26 @@ paths:
                     release_year: 2002
                     director: Sam Raimi
                     description: Peter Parker becomes Spider-Man after being bitten by a genetically modified spider.
+                  - id: 3
+                    title: The Avengers
+                    release_year: 2012
+                    director: Joss Whedon
+                    description: Earth's mightiest heroes unite to stop Loki and an alien invasion.
+                  - id: 4
+                    title: Guardians of the Galaxy
+                    release_year: 2014
+                    director: James Gunn
+                    description: A group of intergalactic outlaws joins forces to protect the galaxy.
+                  - id: 5
+                    title: Black Panther
+                    release_year: 2018
+                    director: Ryan Coogler
+                    description: T'Challa returns to Wakanda to take his place as king and protector.
+                  - id: 6
+                    title: Captain America - The First Avenger
+                    release_year: 2011
+                    director: Joe Johnston
+                    description: Steve Rogers becomes Captain America during World War II.
         '400':
           description: Bad request
           content:
@@ -212,6 +233,7 @@ paths:
         - Movies
     post:
       operationId: createMovie
+      x-exclude: true
       summary: Create a new Marvel movie
       description: Create a Marvel movie and add it to the movie list.
       requestBody:
@@ -220,11 +242,28 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MarvelMovieModel'
-            example:
-              title: Iron Man
-              release_year: 2008
-              director: Jon Favreau
-              description: Tony Stark builds an armored suit and becomes Iron Man.
+            examples:
+              ironMan:
+                summary: Iron Man
+                value:
+                  title: Iron Man
+                  release_year: 2008
+                  director: Jon Favreau
+                  description: Tony Stark builds an armored suit and becomes Iron Man.
+              spiderMan:
+                summary: Spider-Man
+                value:
+                  title: Spider-Man
+                  release_year: 2002
+                  director: Sam Raimi
+                  description: Peter Parker becomes Spider-Man after being bitten by a genetically modified spider.
+              blackPanther:
+                summary: Black Panther
+                value:
+                  title: Black Panther
+                  release_year: 2018
+                  director: Ryan Coogler
+                  description: T'Challa returns to Wakanda to take his place as king and protector.
       responses:
         '201':
           description: Successfully created
@@ -243,6 +282,7 @@ paths:
   '/movies/{movieId}':
     get:
       operationId: getMovie
+      x-exclude: true
       summary: Get a Marvel movie
       description: Retrieve information about a specific Marvel movie.
       parameters:
@@ -254,12 +294,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MarvelMovieModel'
-              example:
-                id: 1
-                title: Iron Man
-                release_year: 2008
-                director: Jon Favreau
-                description: Tony Stark builds an armored suit and becomes Iron Man.
+              examples:
+                ironMan:
+                  summary: Iron Man
+                  value:
+                    id: 1
+                    title: Iron Man
+                    release_year: 2008
+                    director: Jon Favreau
+                    description: Tony Stark builds an armored suit and becomes Iron Man.
+                spiderMan:
+                  summary: Spider-Man
+                  value:
+                    id: 2
+                    title: Spider-Man
+                    release_year: 2002
+                    director: Sam Raimi
+                    description: Peter Parker becomes Spider-Man after being bitten by a genetically modified spider.
+                guardiansOfTheGalaxy:
+                  summary: Guardians of the Galaxy
+                  value:
+                    id: 4
+                    title: Guardians of the Galaxy
+                    release_year: 2014
+                    director: James Gunn
+                    description: A group of intergalactic outlaws joins forces to protect the galaxy.
         '404':
           description: Marvel movie not found
           content:
@@ -354,7 +413,7 @@ components:
           description: ID of the Marvel movie.
           type: integer
           format: int64
-          example: 1
+          example: ABC # TODO
           readOnly: true
         title:
           description: The title of the Marvel movie.
@@ -500,3 +559,4 @@ tags:
     description: Manage all Marvel heroes.
   - name: Movies
     description: Manage all movies from the Marvel Universe.
+    x-exclude: true

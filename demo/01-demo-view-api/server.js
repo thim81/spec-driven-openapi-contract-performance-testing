@@ -25,7 +25,7 @@ createServer((request, response) => {
   const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
 
   if (pathname === '/') {
-    response.writeHead(302, { Location: '/demo-01-view-api/home/' });
+    response.writeHead(302, { Location: '/01-demo-view-api/home/' });
     response.end();
     return;
   }

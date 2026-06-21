@@ -13,6 +13,8 @@ from fastmcp.server.providers.openapi import MCPType, RouteMap
 
 OPENAPI_PATH = Path(__file__).resolve().parents[2] / "openapi-appearance.yml"
 API_BASE_URL = os.getenv("MARVEL_API_BASE_URL", "http://127.0.0.1:2007")
+MCP_HOST = os.getenv("MARVEL_MCP_HOST", "127.0.0.1")
+MCP_PORT = int(os.getenv("MARVEL_MCP_PORT", "8007"))
 
 INSTRUCTIONS = """
 Use these three tools to answer questions about heroes and their movie appearances.
@@ -71,4 +73,4 @@ mcp = FastMCP.from_openapi(
 
 
 if __name__ == "__main__":
-    mcp.run()
+    mcp.run(transport="http", host=MCP_HOST, port=MCP_PORT)

@@ -16,23 +16,51 @@ Start the SQLite-backed Marvel API from the parent directory:
 npm start
 ```
 
-In another terminal, install and verify the FastMCP server:
+Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/). No project
+virtual environment or dependency installation is required: `uvx` creates an
+isolated environment and caches it for subsequent runs.
+
+In another terminal, inspect and run the FastMCP server:
 
 ```bash
-cd fastmcp
-python3 -m venv .venv
-.venv/bin/pip install -e .
-.venv/bin/python test_tools.py
-.venv/bin/python server.py
+npm run mcp:fastmcp:inspect
+npm run mcp:fastmcp
 ```
 
-After setup, the last two commands are also available from the parent directory
-as `npm run mcp:fastmcp:test` and `npm run mcp:fastmcp`.
+The underlying server command is:
 
-The MCP transport defaults to stdio. Copy the entry from
-`claude-desktop.example.json` into the Claude Desktop configuration to use it
-there. Set `MARVEL_API_BASE_URL` when the API is not available at
-`http://127.0.0.1:2007`.
+```bash
+uvx --from 'fastmcp-slim[server]==3.4.2' --with pyyaml fastmcp run \
+  fastmcp/server.py --transport http --host 127.0.0.1 --port 8007
+```
+
+The Streamable HTTP MCP endpoint is `http://127.0.0.1:8007/mcp`. Keep this
+process running, then copy the `npx mcp-remote` entry from
+`claude-desktop.example.json` into the Claude Desktop configuration.
+`mcp-remote` is configured with `http-only`, so it will not fall back to SSE.
+
+Set `MARVEL_API_BASE_URL` before starting FastMCP when the REST API is not
+available at `http://127.0.0.1:2007`. Use `MARVEL_MCP_HOST` and
+`MARVEL_MCP_PORT` only when running `server.py` directly; the npm command sets
+the host and port through FastMCP's CLI.
+
+## Inspect MCP requests
+
+Run the dedicated Inspectr configuration instead of starting FastMCP directly:
+
+```bash
+npm run mcp:fastmcp:proxy
+```
+
+This command starts both services:
+
+- FastMCP backend: `http://127.0.0.1:8007/mcp`
+- Inspectr MCP proxy: `http://127.0.0.1:8008/mcp`
+- Inspectr request UI: `http://127.0.0.1:4008`
+
+The Claude Desktop example connects `mcp-remote` to port `8008`, ensuring MCP
+requests pass through Inspectr. Keep `mcp-remote` on `http-only` because the
+FastMCP server uses Streamable HTTP.
 
 ## Demo question
 

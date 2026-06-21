@@ -94,7 +94,7 @@ paths:
                 $ref: '#/components/schemas/UnprocessableEntityError'
       tags:
         - heroes
-  '/heroes/{id}':
+  '/heroes/{heroId}':
     get:
       operationId: getHero
       summary: Get a Marvel hero
@@ -246,7 +246,7 @@ paths:
 components:
   parameters:
     HeroId:
-      name: id
+      name: heroId
       in: path
       required: true
       description: ID of the Marvel hero

@@ -176,7 +176,7 @@ paths:
   /movies:
     get:
       operationId: getMovies
-      x-exclude: true
+#      x-exclude: true
       summary: Get all Marvel movies
       description: Retrieve a list of all Marvel movies that have been created.
       parameters:
@@ -266,7 +266,7 @@ paths:
         - Movies
     post:
       operationId: createMovie
-      x-exclude: true
+#      x-exclude: true
       summary: Create a new Marvel movie
       description: Create a Marvel movie and add it to the movie list.
       requestBody:
@@ -329,7 +329,7 @@ paths:
   '/movies/{movieId}':
     get:
       operationId: getMovie
-      x-exclude: true
+#      x-exclude: true
       summary: Get a Marvel movie
       description: Retrieve information about a specific Marvel movie.
       parameters:
@@ -622,4 +622,4 @@ tags:
     description: Manage all Marvel heroes.
   - name: Movies
     description: Manage all movies from the Marvel Universe.
-    x-exclude: true
+#    x-exclude: true

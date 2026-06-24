@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "preview:bump": "bump preview --live ../openapi.yml",
+    "doc:bump": "bump preview --live ../openapi.yml",
     "format": "openapi-format ../openapi.yml --output ../openapi_formatted.yml --keepComments",
-    "lint": "redocly lint ../openapi.yml"
+    "doc:lint": "redocly lint ../openapi.yml"
   },
   "devDependencies": {
     "@apideck/portman": "^1.35.0",

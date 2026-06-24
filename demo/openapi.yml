@@ -210,7 +210,7 @@ components:
           description: ID of the Marvel character
           type: integer
           format: int64
-          example: 1
+          example: ABC # TODO
           readOnly: true
         name:
           description: The full name of the Marvel character.

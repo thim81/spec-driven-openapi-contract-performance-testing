@@ -8,6 +8,7 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
+    "inspectr:preview": "npm run build && npm run preview -- --host 127.0.0.1 --port 5173 --strictPort",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

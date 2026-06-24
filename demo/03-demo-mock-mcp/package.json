@@ -9,6 +9,7 @@
   "scripts": {
     "api:inspectr": "inspectr",
     "app:inspectr": "inspectr --config loveable-app/inspectr.yaml",
+    "app:inspectr:preview": "npm -C loveable-app run inspectr:preview",
     "start": "npm run api",
     "api": "node rest-api/src/server.mjs",
     "api:watch": "node --watch rest-api/src/server.mjs",

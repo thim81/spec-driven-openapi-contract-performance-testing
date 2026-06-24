@@ -1,4 +1,4 @@
-# Inspectr proxy for the Lovable webapp dev server.
+# Inspectr proxy for the Lovable webapp preview server.
 listen: ':8004'
 backend: 'http://127.0.0.1:5173'
 
@@ -8,12 +8,7 @@ commandArgs:
   - '-C'
   - 'loveable-app'
   - 'run'
-  - 'dev'
-  - '--'
-  - '--host'
-  - '127.0.0.1'
-  - '--port'
-  - '5173'
+  - 'inspectr:preview'
 
 # Inspectr request log and UI.
 app: false

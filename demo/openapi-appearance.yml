@@ -873,11 +873,11 @@ components:
           type: string
       example:
         error: Marvel hero not found
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-security: []
+#  securitySchemes:
+#    bearerAuth:
+#      type: http
+#      scheme: bearer
+#security: []
 #  - bearerAuth: []
 tags:
   - name: Heroes

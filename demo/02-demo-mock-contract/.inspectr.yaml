@@ -5,7 +5,7 @@ mockDynamic: false
 
 # Inspectr application and request log.
 app: true
-appPort: '4006'
+appPort: '4567'
 print: true
 storeInMemory: true
 

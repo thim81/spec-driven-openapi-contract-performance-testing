@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "mock": "inspectr",
-    "preview:bump": "bump preview --live ../openapi-appearance.yml",
-    "lint:openapi": "redocly lint ../openapi-appearance.yml",
+    "mock:inspectr": "inspectr",
+    "mock:bump": "bump preview --live ../openapi-appearance.yml",
     "generate:client": "orval --input ../openapi-appearance.yml --output ./client/api/hero-api.ts --client fetch",
     "contract:generate": "portman --cliOptionsFile ./config/portman-cli-options.json --syncPostman true",
     "contract:test": "portman --cliOptionsFile ./config/portman-cli-options.json --runNewman true --syncPostman false",
-    "test": "npm run contract:test"
+    "test": "npm run contract:test",
+    "lint:mock": "redocly lint ../openapi-appearance.yml"
   },
   "devDependencies": {
     "@apideck/portman": "^1.35.0",

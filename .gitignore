@@ -9,3 +9,7 @@ npm-debug.log
 /sdk/kiota/vendor/
 /sdk/orval/node_modules/*
 /_tmp/*
+
+# WIP
+convert-bru
+docs-redocly

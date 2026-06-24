@@ -14,6 +14,29 @@ export function createApp(db) {
   const app = express();
   app.disable('x-powered-by');
   app.use(express.json());
+  app.use((request, response, next) => {
+    const origin = request.headers.origin;
+    const allowedOrigins = (process.env.CORS_ORIGIN ?? '*')
+      .split(',')
+      .map((value) => value.trim())
+      .filter(Boolean);
+    const allowAnyOrigin = allowedOrigins.includes('*');
+    const isAllowedOrigin = allowAnyOrigin || (origin ? allowedOrigins.includes(origin) : false);
+
+    if (isAllowedOrigin) {
+      response.setHeader('Access-Control-Allow-Origin', allowAnyOrigin ? '*' : origin);
+      response.setHeader('Vary', 'Origin');
+      response.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+      response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
+    }
+
+    if (request.method === 'OPTIONS') {
+      response.status(204).end();
+      return;
+    }
+
+    next();
+  });
 
   app.get('/', (_request, response) => {
     response.json({ api: 'Marvel Universe API', version: '1.1.0' });

@@ -1,74 +1,145 @@
 import { queryOptions } from "@tanstack/react-query";
-import {
-  HEROES,
-  MOVIES,
-  getHeroById,
-  getMovieById,
-  getAppearancesForHero,
-  getAppearancesForMovie,
-  type Hero,
-  type Movie,
-  type Appearance,
-} from "./data";
 
-/**
- * Marvel Universe API client.
- *
- * Per the OpenAPI spec the live mock lives at:
- *   https://marvel-api-mock.in-spectr.dev
- * At time of build it returned 404 on every documented path, so we ship with a
- * baked-in dataset modeled exactly on the spec's schemas. If the upstream API
- * comes back online, swap `USE_LOCAL` to false (or wire it to an env flag).
- */
-const USE_LOCAL = true;
-// const API_BASE = "https://marvel-api-mock.in-spectr.dev";
+export type Hero = {
+  id: number;
+  name: string;
+  first_name?: string;
+  last_name?: string;
+  description: string | null;
+  powers: string[];
+};
 
-async function delay<T>(value: T, ms = 120): Promise<T> {
-  return new Promise((r) => setTimeout(() => r(value), ms));
+export type Movie = {
+  id: number;
+  title: string;
+  release_year: number;
+  director: string;
+  description: string | null;
+};
+
+export type Appearance = {
+  id: number;
+  hero_id: number;
+  movie_id: number;
+  role: "lead" | "supporting" | "cameo";
+};
+
+type Pagination = {
+  total: number;
+  current_page: number;
+  next_page: number | null;
+  prev_page: number | null;
+  per_page: number;
+  total_pages: number;
+};
+
+type CollectionEnvelope<T> = {
+  pagination?: {
+    pagination?: Pagination;
+  };
+} & Record<string, T[] | unknown>;
+
+class MarvelApiError extends Error {
+  status: number;
+
+  constructor(status: number, message: string) {
+    super(message);
+    this.name = "MarvelApiError";
+    this.status = status;
+  }
+}
+
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") ?? "https://marvel-api.in-spectr.dev";
+const DEFAULT_LIMIT = 100;
+
+function buildApiUrl(path: string) {
+  if (!API_BASE_URL) return path;
+  return new URL(path, `${API_BASE_URL}/`).toString();
+}
+
+async function requestJson<T>(path: string): Promise<T> {
+  const response = await fetch(buildApiUrl(path), {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    let message = response.statusText || "Request failed";
+    try {
+      const body = await response.json();
+      if (body && typeof body.error === "string") {
+        message = body.error;
+      }
+    } catch {
+      // Use the HTTP status text when the body is not JSON.
+    }
+    throw new MarvelApiError(response.status, message);
+  }
+
+  return response.json() as Promise<T>;
+}
+
+function unwrapCollection<T>(envelope: CollectionEnvelope<T>, key: string): T[] {
+  const items = envelope[key];
+  return Array.isArray(items) ? (items as T[]) : [];
+}
+
+async function fetchAllCollection<T>(path: string, key: string): Promise<T[]> {
+  const firstPage = await requestJson<CollectionEnvelope<T>>(`${path}?page=1&limit=${DEFAULT_LIMIT}`);
+  const items = unwrapCollection(firstPage, key);
+  const totalPages = firstPage.pagination?.pagination?.total_pages ?? 1;
+
+  if (totalPages <= 1) {
+    return items;
+  }
+
+  const rest = await Promise.all(
+    Array.from({ length: totalPages - 1 }, async (_, index) => {
+      const page = index + 2;
+      const envelope = await requestJson<CollectionEnvelope<T>>(
+        `${path}?page=${page}&limit=${DEFAULT_LIMIT}`,
+      );
+      return unwrapCollection(envelope, key);
+    }),
+  );
+
+  return [items, ...rest].flat();
+}
+
+async function fetchResource<T>(path: string): Promise<T> {
+  return requestJson<T>(path);
+}
+
+export function isMarvelApiNotFoundError(error: unknown): error is MarvelApiError {
+  return error instanceof MarvelApiError && error.status === 404;
 }
 
 export async function fetchHeroes(): Promise<Hero[]> {
-  if (USE_LOCAL) return delay(HEROES);
-  // const res = await fetch(`${API_BASE}/heroes?limit=100`);
-  // const data = await res.json();
-  // return data.heroes as Hero[];
-  return HEROES;
+  return fetchAllCollection<Hero>("/heroes", "heroes");
 }
 
 export async function fetchHero(id: number): Promise<Hero> {
-  if (USE_LOCAL) {
-    const h = getHeroById(id);
-    if (!h) throw new Error("Hero not found");
-    return delay(h);
-  }
-  return HEROES[0];
+  return fetchResource<Hero>(`/heroes/${id}`);
 }
 
 export async function fetchHeroAppearances(heroId: number): Promise<Appearance[]> {
-  if (USE_LOCAL) return delay(getAppearancesForHero(heroId));
-  return [];
+  return fetchAllCollection<Appearance>(`/heroes/${heroId}/appearances`, "appearances");
 }
 
 export async function fetchMovies(): Promise<Movie[]> {
-  if (USE_LOCAL) return delay(MOVIES);
-  return MOVIES;
+  return fetchAllCollection<Movie>("/movies", "movies");
 }
 
 export async function fetchMovie(id: number): Promise<Movie> {
-  if (USE_LOCAL) {
-    const m = getMovieById(id);
-    if (!m) throw new Error("Movie not found");
-    return delay(m);
-  }
-  return MOVIES[0];
+  return fetchResource<Movie>(`/movies/${id}`);
 }
 
 export async function fetchMovieAppearances(movieId: number): Promise<Appearance[]> {
-  if (USE_LOCAL) return delay(getAppearancesForMovie(movieId));
-  return [];
+  const appearances = await fetchAllCollection<Appearance>("/appearances", "appearances");
+  return appearances.filter((appearance) => appearance.movie_id === movieId);
 }
-
-// ── Query options ───────────────────────────────────────────────────────────
 
 export const heroesQuery = () =>
   queryOptions({ queryKey: ["heroes"], queryFn: fetchHeroes });

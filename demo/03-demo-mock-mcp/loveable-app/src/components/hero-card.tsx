@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import type { Hero } from "@/lib/marvel/data";
+import type { Hero } from "@/lib/marvel/api";
 import { heroGradient, heroMonogram } from "@/lib/marvel/images";
 
 /**

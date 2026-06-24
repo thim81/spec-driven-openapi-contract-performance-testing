@@ -172,8 +172,8 @@ const EXTRA_MOVIES = [
   [18, 'Thor: Ragnarok', 2017, 'Taika Waititi', 'Thor must escape Sakaar and stop the destruction of Asgard.'],
   [19, 'Doctor Strange', 2016, 'Scott Derrickson', 'A brilliant surgeon discovers the hidden world of magic and alternate dimensions.'],
   [20, 'Captain Marvel', 2019, 'Anna Boden & Ryan Fleck', "Carol Danvers discovers her past as she becomes one of the universe's most powerful heroes."],
-  [21, 'Avengers: Doomsday', 2026, null, null],
-  [22, 'Spider-Man: Brand New Day', 2026, null, null],
+  [21, 'Avengers: Doomsday', 2026, 'Joe Russo and Anthony Russo', null],
+  [22, 'Spider-Man: Brand New Day', 2026, 'Destin Daniel Cretton', null],
   [23, 'Guardians of the Galaxy Vol. 2', 2017, 'James Gunn', 'The Guardians travel across the cosmos while Peter Quill learns more about his origins.'],
   [24, 'Guardians of the Galaxy Vol. 3', 2023, 'James Gunn', 'The Guardians face a new threat while trying to protect one of their own.']
 ].map(([id, title, release_year, director, description]) => ({

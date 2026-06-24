@@ -37,7 +37,20 @@ export function SiteHeader() {
         <div className="mx-auto max-w-7xl px-6 h-10 flex items-center justify-center gap-8 text-[11px] font-sans tracking-[0.25em] uppercase text-white/60">
           <span>News</span>
           <span>Characters</span>
-          <span className="text-white">Movies</span>
+          <Link
+            to="/"
+            activeOptions={{ exact: true }}
+            className="text-white hover:text-primary transition-colors"
+          >
+            Heroes
+          </Link>
+          <Link
+            to="/movies"
+            activeOptions={{ exact: true }}
+            className="text-white hover:text-primary transition-colors"
+          >
+            Movies
+          </Link>
           <span>Comics</span>
           <span>Videos</span>
         </div>

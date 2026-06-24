@@ -4,14 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "npm run preview",
-    "preview": "node server.js",
-    "mock": "inspectr",
+    "start": "node server.js",
     "preview:bump": "bump preview --live ../openapi.yml",
-    "preview:scalar": "scalar document serve ../openapi.yml --watch",
     "format": "openapi-format ../openapi.yml --output ../openapi_formatted.yml --keepComments",
-    "lint": "redocly lint ../openapi.yml",
-    "contract:generate": "portman --cliOptionsFile ./config/portman-cli-options.json --syncPostman true"
+    "lint": "redocly lint ../openapi.yml"
   },
   "devDependencies": {
     "@apideck/portman": "^1.35.0",

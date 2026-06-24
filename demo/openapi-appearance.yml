@@ -6,7 +6,7 @@ info:
   x-logo:
     url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/960px-Marvel_Logo.svg.png'
 servers:
-  - url: 'https://marvel-api-mock.in-spectr.dev'
+  - url: 'https://marvel-api-mock.in-spectr.dev/api'
     description: Mock
 paths:
   /:

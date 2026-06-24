@@ -50,12 +50,13 @@ class MarvelApiError extends Error {
 }
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") ?? "https://marvel-api.in-spectr.dev";
+  import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") ?? "https://marvel-api.in-spectr.dev/api";
 const DEFAULT_LIMIT = 100;
 
 function buildApiUrl(path: string) {
   if (!API_BASE_URL) return path;
-  return new URL(path, `${API_BASE_URL}/`).toString();
+  const base = API_BASE_URL.endsWith("/api") ? API_BASE_URL : `${API_BASE_URL}/api`;
+  return new URL(path.replace(/^\/+/, ""), `${base}/`).toString();
 }
 
 async function requestJson<T>(path: string): Promise<T> {

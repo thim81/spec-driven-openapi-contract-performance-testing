@@ -27,7 +27,7 @@ after(async () => {
 });
 
 test('returns API information', async () => {
-  const response = await fetch(`${baseUrl}/`);
+  const response = await fetch(`${baseUrl}/api/`);
   assert.equal(response.status, 200);
   assert.deepEqual(await response.json(), {
     api: 'Marvel Universe API',
@@ -36,30 +36,30 @@ test('returns API information', async () => {
 });
 
 test('paginates heroes with schema-compatible metadata', async () => {
-  const firstResponse = await fetch(`${baseUrl}/heroes?page=1&limit=1`);
+  const firstResponse = await fetch(`${baseUrl}/api/heroes?page=1&limit=1`);
   const first = await firstResponse.json();
   assert.equal(firstResponse.status, 200);
   assert.equal(first.heroes[0].name, 'Iron Man');
   assert.deepEqual(first.pagination.pagination, {
-    total: 2,
+    total: 17,
     current_page: 1,
     next_page: 2,
     prev_page: null,
     per_page: 1,
-    total_pages: 2
+    total_pages: 17
   });
 
-  const second = await (await fetch(`${baseUrl}/heroes?page=2&limit=1`)).json();
+  const second = await (await fetch(`${baseUrl}/api/heroes?page=2&limit=1`)).json();
   assert.equal(second.heroes[0].name, 'Spider-Man');
   assert.equal(second.pagination.pagination.prev_page, 1);
 });
 
 test('returns all seeded movies across pages', async () => {
-  const response = await fetch(`${baseUrl}/movies?page=3&limit=5`);
+  const response = await fetch(`${baseUrl}/api/movies?page=3&limit=5`);
   const body = await response.json();
   assert.equal(response.status, 200);
-  assert.equal(body.pagination.pagination.total, 15);
-  assert.equal(body.pagination.pagination.total_pages, 3);
+  assert.equal(body.pagination.pagination.total, 24);
+  assert.equal(body.pagination.pagination.total_pages, 5);
   assert.deepEqual(
     body.movies.map((movie) => movie.title),
     [
@@ -73,15 +73,15 @@ test('returns all seeded movies across pages', async () => {
 });
 
 test('returns canonical appearances for a hero', async () => {
-  const response = await fetch(`${baseUrl}/heroes/1/appearances`);
+  const response = await fetch(`${baseUrl}/api/heroes/1/appearances`);
   const body = await response.json();
   assert.equal(response.status, 200);
-  assert.deepEqual(body.appearances.map(({ id }) => id), [1, 3, 4, 5, 7]);
-  assert.equal(body.pagination.pagination.total, 5);
+  assert.deepEqual(body.appearances.map(({ id }) => id), [1, 2, 3, 4, 5, 6, 7]);
+  assert.equal(body.pagination.pagination.total, 7);
 });
 
 test('creates, updates, and deletes a hero', async () => {
-  const createResponse = await fetch(`${baseUrl}/heroes`, {
+  const createResponse = await fetch(`${baseUrl}/api/heroes`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -93,9 +93,9 @@ test('creates, updates, and deletes a hero', async () => {
   });
   const created = await createResponse.json();
   assert.equal(createResponse.status, 201);
-  assert.equal(created.id, 3);
+  assert.equal(created.id, 18);
 
-  const updateResponse = await fetch(`${baseUrl}/heroes/3`, {
+  const updateResponse = await fetch(`${baseUrl}/api/heroes/3`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -107,12 +107,12 @@ test('creates, updates, and deletes a hero', async () => {
   assert.equal(updateResponse.status, 200);
   assert.equal((await updateResponse.json()).description, 'Expert spy and Avenger.');
 
-  assert.equal((await fetch(`${baseUrl}/heroes/3`, { method: 'DELETE' })).status, 204);
-  assert.equal((await fetch(`${baseUrl}/heroes/3`)).status, 404);
+  assert.equal((await fetch(`${baseUrl}/api/heroes/3`, { method: 'DELETE' })).status, 204);
+  assert.equal((await fetch(`${baseUrl}/api/heroes/3`)).status, 404);
 });
 
 test('creates a movie and a related appearance', async () => {
-  const movieResponse = await fetch(`${baseUrl}/movies`, {
+  const movieResponse = await fetch(`${baseUrl}/api/movies`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -123,26 +123,26 @@ test('creates a movie and a related appearance', async () => {
   });
   const movie = await movieResponse.json();
   assert.equal(movieResponse.status, 201);
-  assert.equal(movie.id, 16);
+  assert.equal(movie.id, 25);
 
-  const appearanceResponse = await fetch(`${baseUrl}/appearances`, {
+  const appearanceResponse = await fetch(`${baseUrl}/api/appearances`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ hero_id: 2, movie_id: movie.id, role: 'lead' })
   });
   const appearance = await appearanceResponse.json();
   assert.equal(appearanceResponse.status, 201);
-  assert.equal(appearance.id, 9);
+  assert.equal(appearance.id, 90);
   assert.deepEqual(
-    await (await fetch(`${baseUrl}/appearances/9`)).json(),
+    await (await fetch(`${baseUrl}/api/appearances/90`)).json(),
     appearance
   );
 });
 
 test('rejects invalid pagination and request fields', async () => {
-  assert.equal((await fetch(`${baseUrl}/movies?page=99`)).status, 400);
+  assert.equal((await fetch(`${baseUrl}/api/movies?page=99`)).status, 400);
 
-  const response = await fetch(`${baseUrl}/movies`, {
+  const response = await fetch(`${baseUrl}/api/movies`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ title: 'Invalid', release_year: 'soon', extra: true })

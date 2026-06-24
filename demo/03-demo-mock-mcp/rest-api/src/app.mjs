@@ -12,6 +12,7 @@ class ApiError extends Error {
 
 export function createApp(db) {
   const app = express();
+  const api = express.Router();
   app.disable('x-powered-by');
   app.use(express.json());
   app.use((request, response, next) => {
@@ -38,11 +39,11 @@ export function createApp(db) {
     next();
   });
 
-  app.get('/', (_request, response) => {
+  api.get('/', (_request, response) => {
     response.json({ api: 'Marvel Universe API', version: '1.1.0' });
   });
 
-  app.get('/heroes', (request, response) => {
+  api.get('/heroes', (request, response) => {
     const total = countRows(db, 'heroes');
     const page = getPage(request, total);
     const rows = db.prepare(`
@@ -58,7 +59,7 @@ export function createApp(db) {
     });
   });
 
-  app.post('/heroes', (request, response) => {
+  api.post('/heroes', (request, response) => {
     const hero = validateHero(request.body);
     const result = db.prepare(`
       INSERT INTO heroes (name, first_name, last_name, description, powers)
@@ -74,11 +75,11 @@ export function createApp(db) {
     response.status(201).json(findHero(db, Number(result.lastInsertRowid)));
   });
 
-  app.get('/heroes/:heroId', (request, response) => {
+  api.get('/heroes/:heroId', (request, response) => {
     response.json(requireHero(db, request.params.heroId));
   });
 
-  app.put('/heroes/:heroId', (request, response) => {
+  api.put('/heroes/:heroId', (request, response) => {
     const heroId = requirePositiveInteger(request.params.heroId, 'heroId');
     requireHero(db, heroId);
     const hero = validateHero(request.body);
@@ -99,7 +100,7 @@ export function createApp(db) {
     response.json(findHero(db, heroId));
   });
 
-  app.delete('/heroes/:heroId', (request, response) => {
+  api.delete('/heroes/:heroId', (request, response) => {
     const heroId = requirePositiveInteger(request.params.heroId, 'heroId');
     const result = db.prepare('DELETE FROM heroes WHERE id = ?').run(heroId);
     if (result.changes === 0) {
@@ -108,7 +109,7 @@ export function createApp(db) {
     response.status(204).send();
   });
 
-  app.get('/movies', (request, response) => {
+  api.get('/movies', (request, response) => {
     const total = countRows(db, 'movies');
     const page = getPage(request, total);
     const movies = db.prepare(`
@@ -124,7 +125,7 @@ export function createApp(db) {
     });
   });
 
-  app.post('/movies', (request, response) => {
+  api.post('/movies', (request, response) => {
     const movie = validateMovie(request.body);
     const result = db.prepare(`
       INSERT INTO movies (title, release_year, director, description)
@@ -134,11 +135,11 @@ export function createApp(db) {
     response.status(201).json(findMovie(db, Number(result.lastInsertRowid)));
   });
 
-  app.get('/movies/:movieId', (request, response) => {
+  api.get('/movies/:movieId', (request, response) => {
     response.json(requireMovie(db, request.params.movieId));
   });
 
-  app.get('/appearances', (request, response) => {
+  api.get('/appearances', (request, response) => {
     const total = countRows(db, 'appearances');
     const page = getPage(request, total);
     const appearances = db.prepare(`
@@ -154,7 +155,7 @@ export function createApp(db) {
     });
   });
 
-  app.post('/appearances', (request, response) => {
+  api.post('/appearances', (request, response) => {
     const appearance = validateAppearance(request.body);
     requireHero(db, appearance.hero_id, 'hero_id');
     requireMovie(db, appearance.movie_id, 'movie_id');
@@ -174,11 +175,11 @@ export function createApp(db) {
     response.status(201).json(findAppearance(db, Number(result.lastInsertRowid)));
   });
 
-  app.get('/appearances/:appearanceId', (request, response) => {
+  api.get('/appearances/:appearanceId', (request, response) => {
     response.json(requireAppearance(db, request.params.appearanceId));
   });
 
-  app.get('/heroes/:heroId/appearances', (request, response) => {
+  api.get('/heroes/:heroId/appearances', (request, response) => {
     const heroId = requirePositiveInteger(request.params.heroId, 'heroId');
     requireHero(db, heroId);
     const total = db.prepare(`
@@ -198,6 +199,8 @@ export function createApp(db) {
       pagination: { pagination: page.pagination }
     });
   });
+
+  app.use('/api', api);
 
   app.use((_request, response) => {
     response.status(404).json({ error: 'Resource not found' });

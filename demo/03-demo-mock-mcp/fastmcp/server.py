@@ -12,7 +12,7 @@ from fastmcp.server.providers.openapi import MCPType, RouteMap
 
 
 OPENAPI_PATH = Path(__file__).resolve().parents[2] / "openapi-appearance.yml"
-API_BASE_URL = os.getenv("MARVEL_API_BASE_URL", "http://127.0.0.1:3007")
+API_BASE_URL = os.getenv("MARVEL_API_BASE_URL", "http://127.0.0.1:3007/api")
 MCP_HOST = os.getenv("MARVEL_MCP_HOST", "127.0.0.1")
 MCP_PORT = int(os.getenv("MARVEL_MCP_PORT", "8007"))
 

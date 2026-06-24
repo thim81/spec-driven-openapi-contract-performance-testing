@@ -10,17 +10,10 @@ import yaml
 from fastmcp import FastMCP
 from fastmcp.server.providers.openapi import MCPType, RouteMap
 
-
-OPENAPI_PATH = Path(__file__).resolve().parents[2] / "openapi-appearance.yml"
-API_BASE_URL = os.getenv("MARVEL_API_BASE_URL", "http://127.0.0.1:3007/api")
-MCP_HOST = os.getenv("MARVEL_MCP_HOST", "127.0.0.1")
-MCP_PORT = int(os.getenv("MARVEL_MCP_PORT", "8007"))
-
 INSTRUCTIONS = """
 Use these three tools to answer questions about heroes and their movie appearances.
 
-For questions such as "Which heroes appeared in both Infinity War and Endgame — and
-what else were they in?":
+For questions such about appearances use a workflow":
 1. Call list_movies for every page to resolve movie titles to IDs and retain the
    complete ID-to-title mapping.
 2. Call list_heroes for every page.
@@ -33,6 +26,11 @@ Pagination metadata is nested under response.pagination.pagination. Continue unt
 current_page equals total_pages. Do not infer movie titles from IDs.
 """.strip()
 
+
+OPENAPI_PATH = Path(__file__).resolve().parents[2] / "openapi-appearance.yml"
+API_BASE_URL = os.getenv("MARVEL_API_BASE_URL", "http://127.0.0.1:3007/api")
+MCP_HOST = os.getenv("MARVEL_MCP_HOST", "127.0.0.1")
+MCP_PORT = int(os.getenv("MARVEL_MCP_PORT", "8007"))
 
 def load_openapi_spec() -> dict:
     with OPENAPI_PATH.open(encoding="utf-8") as specification:

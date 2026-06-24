@@ -9,15 +9,16 @@
   "scripts": {
     "api:inspectr": "inspectr",
     "app:inspectr": "inspectr --config loveable-app/inspectr.yaml",
+    "mcp:inspectr": "inspectr --config fastmcp/.inspectr.yaml",
+    "contract:generate": "portman --cliOptionsFile ./config/portman-cli-options.json --syncPostman true",
+    "--------------": "----------------------------------------------------------------------------------------",
     "app:inspectr:preview": "npm -C loveable-app run inspectr:preview",
     "start": "npm run api",
     "api": "node rest-api/src/server.mjs",
     "api:watch": "node --watch rest-api/src/server.mjs",
-    "mcp:inspectr": "inspectr --config fastmcp/.inspectr.yaml",
     "mcp:fastmcp": "uvx --from 'fastmcp-slim[server]==3.4.2' --with pyyaml fastmcp run fastmcp/server.py --transport http --host 127.0.0.1 --port 8007",
     "mcp:fastmcp:inspect": "uvx --from 'fastmcp-slim[server]==3.4.2' --with pyyaml fastmcp inspect fastmcp/server.py --format mcp",
     "test": "node --test rest-api/test/api.test.mjs",
-    "contract:generate": "portman --cliOptionsFile ./config/portman-cli-options.json --syncPostman true",
     "contract:test": "portman --cliOptionsFile ./config/portman-cli-options.json --runNewman true --syncPostman false",
     "mcp:bump": "bump deploy config/bump-flower-mcp.yml --mcp-server marvel-mcp --token 8y2qRsiUcudHG9UtdUdaAx718XdtyPtC"
   },

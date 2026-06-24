@@ -24,10 +24,6 @@ paths:
             application/json:
               schema:
                 type: object
-                additionalProperties: false
-                required:
-                  - api
-                  - version
                 properties:
                   api:
                     type: string
@@ -35,6 +31,10 @@ paths:
                   version:
                     type: string
                     example: 1.0.0
+                additionalProperties: false
+                required:
+                  - api
+                  - version
   /heroes:
     get:
       operationId: getHeroes

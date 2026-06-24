@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node server.js",
+    "doc:start": "node server.js",
     "doc:bump": "bump preview --live ../openapi.yml",
-    "format": "openapi-format ../openapi.yml --output ../openapi_formatted.yml --keepComments",
+    "doc:format": "openapi-format ../openapi.yml --output ../openapi_formatted.yml --keepComments",
     "doc:lint": "redocly lint ../openapi.yml"
   },
   "devDependencies": {

@@ -1,0 +1,25 @@
+# Inspectr proxy for the Lovable webapp dev server.
+listen: ':8004'
+backend: 'http://127.0.0.1:5173'
+
+# Start the webapp automatically with the proxy.
+command: 'npm'
+commandArgs:
+  - '-C'
+  - 'loveable-app'
+  - 'run'
+  - 'dev'
+  - '--'
+  - '--host'
+  - '127.0.0.1'
+  - '--port'
+  - '5173'
+
+# Inspectr request log and UI.
+app: false
+print: true
+storeInMemory: true
+
+expose: true
+channel: 'marvel-app'
+channelCode: 'marvel-app-123'

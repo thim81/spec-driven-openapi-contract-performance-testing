@@ -8,6 +8,7 @@
     "contract:generate": "portman --cliOptionsFile ./config/portman-cli-options.json --syncPostman true",
     "lint:mock": "redocly lint ../openapi-appearance.yml",
     "generate:client": "orval --input ../openapi-appearance.yml --output ./client/api/hero-api.ts --client fetch",
+    "--------------": "----------------------------------------------------------------------------------------",
     "run:test": "portman --cliOptionsFile ./config/portman-cli-options.json --runNewman true --syncPostman false"
   },
   "devDependencies": {

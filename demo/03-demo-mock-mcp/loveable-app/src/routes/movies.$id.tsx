@@ -1,16 +1,20 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useSuspenseQueries } from "@tanstack/react-query";
+import { useSuspenseQueries, useSuspenseQuery } from "@tanstack/react-query";
 
-import { movieQuery, movieAppearancesQuery, heroQuery, isMarvelApiNotFoundError } from "@/lib/marvel/api";
+import {
+  movieQuery,
+  movieAppearancesQuery,
+  heroQuery,
+  isMarvelApiNotFoundError,
+} from "@/lib/marvel/api";
 import { heroGradient, heroMonogram } from "@/lib/marvel/images";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
 export const Route = createFileRoute("/movies/$id")({
-  head: ({ loaderData }) => {
-    const movie = loaderData?.movie;
-    const title = movie ? `${movie.title} — Marvel Movies` : "Movie — Marvel Universe";
-    const description = movie?.description ?? "A film in the Marvel Universe.";
+  head: ({ params }) => {
+    const title = `Movie #${params.id} — Marvel Universe`;
+    const description = "A film in the Marvel Universe.";
     return {
       meta: [
         { title },
@@ -25,12 +29,10 @@ export const Route = createFileRoute("/movies/$id")({
     if (!Number.isFinite(id)) throw notFound();
 
     try {
-      const [movie, appearances] = await Promise.all([
+      await Promise.all([
         context.queryClient.ensureQueryData(movieQuery(id)),
         context.queryClient.ensureQueryData(movieAppearancesQuery(id)),
       ]);
-
-      return { movie, appearances };
     } catch (error) {
       if (isMarvelApiNotFoundError(error)) throw notFound();
       throw error;
@@ -60,7 +62,10 @@ function Shell({ children }: { children: React.ReactNode }) {
 }
 
 function MovieDetail() {
-  const { movie, appearances } = Route.useLoaderData();
+  const { id } = Route.useParams();
+  const movieId = Number(id);
+  const { data: movie } = useSuspenseQuery(movieQuery(movieId));
+  const { data: appearances } = useSuspenseQuery(movieAppearancesQuery(movieId));
 
   const heroResults = useSuspenseQueries({
     queries: appearances.map((a) => heroQuery(a.hero_id)),

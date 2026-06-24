@@ -199,6 +199,7 @@ const WEBAPP_APPEARANCES = [
   [1, 'Spider-Man: Homecoming', 'supporting'],
   [1, 'Avengers: Infinity War', 'lead'],
   [1, 'Avengers: Endgame', 'lead'],
+  [2, 'Spider-Man', 'lead'],
   [2, 'Spider-Man: Homecoming', 'lead'],
   [2, 'Spider-Man: No Way Home', 'lead'],
   [2, 'Avengers: Infinity War', 'supporting'],
@@ -234,6 +235,9 @@ const WEBAPP_APPEARANCES = [
   [9, 'Avengers: Endgame', 'supporting'],
   [10, 'Captain Marvel', 'lead'],
   [10, 'Avengers: Endgame', 'supporting'],
+  [2, 'Spider-Man 2', 'lead'],
+  [2, 'Spider-Man 3', 'lead'],
+  [2, 'Spider-Man: Far From Home', 'lead'],
   [11, 'Guardians of the Galaxy', 'lead'],
   [11, 'Guardians of the Galaxy Vol. 2', 'lead'],
   [11, 'Guardians of the Galaxy Vol. 3', 'lead'],
@@ -266,7 +270,17 @@ const WEBAPP_APPEARANCES = [
   [17, 'Guardians of the Galaxy Vol. 2', 'supporting'],
   [17, 'Guardians of the Galaxy Vol. 3', 'lead'],
   [17, 'Avengers: Infinity War', 'supporting'],
-  [17, 'Avengers: Endgame', 'supporting']
+  [17, 'Avengers: Endgame', 'supporting'],
+  [2, 'Spider-Man: Brand New Day', 'lead'],
+  [5, 'Spider-Man: Brand New Day', 'supporting'],
+  [2, 'Avengers: Doomsday', 'lead'],
+  [3, 'Avengers: Doomsday', 'supporting'],
+  [4, 'Avengers: Doomsday', 'supporting'],
+  [5, 'Avengers: Doomsday', 'supporting'],
+  [7, 'Avengers: Doomsday', 'supporting'],
+  [8, 'Avengers: Doomsday', 'supporting'],
+  [9, 'Avengers: Doomsday', 'supporting'],
+  [10, 'Avengers: Doomsday', 'supporting']
 ];
 
 export const appearances = [

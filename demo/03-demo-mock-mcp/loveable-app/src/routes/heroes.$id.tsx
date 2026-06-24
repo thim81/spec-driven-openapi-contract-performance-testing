@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
-import { useSuspenseQueries } from "@tanstack/react-query";
+import { useSuspenseQueries, useSuspenseQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
 import {
@@ -14,10 +14,9 @@ import { SiteFooter } from "@/components/site-footer";
 import { reportLovableError } from "@/lib/lovable-error-reporting";
 
 export const Route = createFileRoute("/heroes/$id")({
-  head: ({ loaderData }) => {
-    const hero = loaderData?.hero;
-    const title = hero ? `${hero.name} — Marvel Universe` : "Hero — Marvel Universe";
-    const description = hero?.description ?? "A hero from the Marvel Universe.";
+  head: ({ params }) => {
+    const title = `Hero #${params.id} — Marvel Universe`;
+    const description = "A hero from the Marvel Universe.";
     return {
       meta: [
         { title },
@@ -32,12 +31,10 @@ export const Route = createFileRoute("/heroes/$id")({
     if (!Number.isFinite(id)) throw notFound();
 
     try {
-      const [hero, appearances] = await Promise.all([
+      await Promise.all([
         context.queryClient.ensureQueryData(heroQuery(id)),
         context.queryClient.ensureQueryData(heroAppearancesQuery(id)),
       ]);
-
-      return { hero, appearances };
     } catch (error) {
       if (isMarvelApiNotFoundError(error)) throw notFound();
       throw error;
@@ -94,7 +91,10 @@ function Shell({ children }: { children: React.ReactNode }) {
 }
 
 function HeroDetail() {
-  const { hero, appearances } = Route.useLoaderData();
+  const { id } = Route.useParams();
+  const heroId = Number(id);
+  const { data: hero } = useSuspenseQuery(heroQuery(heroId));
+  const { data: appearances } = useSuspenseQuery(heroAppearancesQuery(heroId));
 
   const movieResults = useSuspenseQueries({
     queries: appearances.map((a) => movieQuery(a.movie_id)),

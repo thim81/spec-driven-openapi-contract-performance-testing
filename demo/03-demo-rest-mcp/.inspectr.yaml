@@ -1,0 +1,18 @@
+# Inspectr proxy for the SQLite-backed API service.
+listen: ':3007'
+backend: 'http://127.0.0.1:3077'
+command: 'npm'
+commandArgs:
+  - 'run'
+  - 'api'
+
+# Inspectr application and request log.
+app: true
+appPort: '4007'
+print: true
+storeInMemory: true
+
+# Public tunnel configuration.
+expose: true
+channel: 'marvel-api'
+channelCode: 'marvel-api-123'

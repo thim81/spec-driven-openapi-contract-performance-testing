@@ -1,0 +1,20 @@
+# Inspectr proxy for the FastMCP Streamable HTTP server.
+listen: ':8008'
+backend: 'http://127.0.0.1:8007'
+
+# Start FastMCP automatically with the proxy.
+command: 'npm'
+commandArgs:
+  - 'run'
+  - 'mcp:fastmcp'
+
+# Inspectr request log and UI.
+app: true
+appPort: '4008'
+print: true
+storeInMemory: true
+
+# Keep MCP traffic local for the desktop demo.
+expose: true
+channel: 'marvel-mcp'
+channelCode: 'marvel-mcp-123'

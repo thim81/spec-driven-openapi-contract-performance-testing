@@ -1,0 +1,22 @@
+{
+  "name": "02-demo-mock-contract",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "mock:inspectr": "inspectr",
+    "mock:bump": "bump preview --live ../openapi-rest.yml",
+    "contract:generate": "portman --cliOptionsFile ./config/portman-cli-options.json --syncPostman true",
+    "lint:mock": "redocly lint ../openapi-rest.yml",
+    "generate:client": "orval --input ../openapi-rest.yml --output ./client/api/hero-api.ts --client fetch",
+    "--------------": "----------------------------------------------------------------------------------------",
+    "run:test": "portman --cliOptionsFile ./config/portman-cli-options.json --runNewman true --syncPostman false"
+  },
+  "devDependencies": {
+    "@apideck/portman": "^1.35.0",
+    "@inspectr/inspectr": "^1.9.1",
+    "@redocly/cli": "^2.34.0",
+    "bump-cli": "latest",
+    "orval": "^8.18.0",
+    "yaml": "^2.9.0"
+  }
+}

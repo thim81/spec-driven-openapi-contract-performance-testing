@@ -10,6 +10,4 @@ npm-debug.log
 /sdk/orval/node_modules/*
 /_tmp/*
 
-# WIP
-convert-bru
-docs-redocly
+openapi_formatted.yml

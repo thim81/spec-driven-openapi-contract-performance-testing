@@ -1,0 +1,889 @@
+openapi: 3.0.3
+info:
+  title: Marvel Universe API
+  version: 1.0.0
+  description: 'API for retrieving, creating, updating, and deleting information about the Marvel Universe.'
+  x-logo:
+    url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/960px-Marvel_Logo.svg.png'
+servers:
+  - url: 'https://marvel-api-mock.in-spectr.dev/api'
+    description: Mock
+paths:
+  /:
+    get:
+      operationId: getApiInfo
+      summary: Get API information
+      description: Return the API name and version.
+      security: []
+      responses:
+        '200':
+          description: API information
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - api
+                  - version
+                properties:
+                  api:
+                    type: string
+                    example: Marvel Universe API
+                  version:
+                    type: string
+                    example: 1.0.0
+  /heroes:
+    get:
+      operationId: getHeroes
+      summary: Get all Marvel heroes
+      description: Retrieve a list of all Marvel heroes.
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeroesResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+      tags:
+        - Heroes
+    post:
+      operationId: postHeroes
+      summary: Create a new Marvel hero
+      description: Endpoint to create a new Marvel hero.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarvelCharacterModel'
+            example:
+              name: Rocket Raccoon
+              first_name: Rocket
+              last_name: Raccoon
+              description: A member of the Guardians of the Galaxy.
+              powers:
+                - Engineering genius
+                - Expert marksman
+                - Strategic thinking
+      responses:
+        '201':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarvelCharacterModel'
+        '422':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityError'
+      tags:
+        - Heroes
+  '/heroes/{heroId}':
+    get:
+      operationId: getHero
+      summary: Get a Marvel hero
+      description: Retrieve information about a specific Marvel hero.
+      parameters:
+        - $ref: '#/components/parameters/HeroId'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarvelCharacterModel'
+        '404':
+          description: Marvel hero not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+      tags:
+        - Heroes
+    put:
+      operationId: putHero
+      summary: Update a Marvel hero
+      description: Update information about a specific Marvel hero.
+      parameters:
+        - $ref: '#/components/parameters/HeroId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarvelCharacterModel'
+            example:
+              name: Rocket Raccoon
+              first_name: Rocket
+              last_name: Raccoon
+              description: A genetically modified raccoon with a knack for engineering and firearms. A member of the Guardians of the Galaxy.
+              powers:
+                - Engineering genius
+                - Expert marksman
+                - Strategic thinking
+      responses:
+        '200':
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarvelCharacterModel'
+        '404':
+          description: Marvel hero not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '422':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityError'
+      tags:
+        - Heroes
+    delete:
+      operationId: deleteHero
+      summary: Delete a Marvel hero
+      description: Delete a specific Marvel hero.
+      parameters:
+        - $ref: '#/components/parameters/HeroId'
+      responses:
+        '204':
+          description: Successfully deleted
+        '404':
+          description: Marvel hero not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+      tags:
+        - Heroes
+  /movies:
+    get:
+      operationId: getMovies
+#      x-exclude: true
+      summary: Get all Marvel movies
+      description: Retrieve a list of all Marvel movies that have been created.
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoviesResponse'
+              example:
+                movies:
+                  - id: 1
+                    title: Iron Man
+                    release_year: 2008
+                    director: Jon Favreau
+                    description: Tony Stark builds an armored suit and becomes Iron Man.
+                  - id: 2
+                    title: Spider-Man
+                    release_year: 2002
+                    director: Sam Raimi
+                    description: Peter Parker becomes Spider-Man after being bitten by a genetically modified spider.
+                  - id: 3
+                    title: The Avengers
+                    release_year: 2012
+                    director: Joss Whedon
+                    description: Earth's mightiest heroes unite to stop Loki and an alien invasion.
+                  - id: 4
+                    title: Guardians of the Galaxy
+                    release_year: 2014
+                    director: James Gunn
+                    description: A group of intergalactic outlaws joins forces to protect the galaxy.
+                  - id: 5
+                    title: Black Panther
+                    release_year: 2018
+                    director: Ryan Coogler
+                    description: T'Challa returns to Wakanda to take his place as king and protector.
+                  - id: 6
+                    title: Captain America - The First Avenger
+                    release_year: 2011
+                    director: Joe Johnston
+                    description: Steve Rogers becomes Captain America during World War II.
+                  - id: 7
+                    title: Iron Man 2
+                    release_year: 2010
+                    director: Jon Favreau
+                    description: Tony Stark faces pressure to share his armor technology while confronting new enemies.
+                  - id: 8
+                    title: Iron Man 3
+                    release_year: 2013
+                    director: Shane Black
+                    description: Tony Stark confronts the Mandarin and rebuilds after a devastating attack.
+                  - id: 9
+                    title: Spider-Man 2
+                    release_year: 2004
+                    director: Sam Raimi
+                    description: Peter Parker struggles with his responsibilities while facing Doctor Octopus.
+                  - id: 10
+                    title: Spider-Man 3
+                    release_year: 2007
+                    director: Sam Raimi
+                    description: Spider-Man battles Sandman, Venom, and the darker side of his own powers.
+                  - id: 11
+                    title: 'Spider-Man: Homecoming'
+                    release_year: 2017
+                    director: Jon Watts
+                    description: Peter Parker balances high school life with becoming a neighborhood hero.
+                  - id: 12
+                    title: 'Spider-Man: Far From Home'
+                    release_year: 2019
+                    director: Jon Watts
+                    description: Peter Parker encounters Mysterio during a school trip across Europe.
+                  - id: 13
+                    title: 'Spider-Man: No Way Home'
+                    release_year: 2021
+                    director: Jon Watts
+                    description: A spell exposes Peter Parker to villains and heroes from across the multiverse.
+                  - id: 14
+                    title: 'Avengers: Infinity War'
+                    release_year: 2018
+                    director: Anthony Russo and Joe Russo
+                    description: The Avengers and their allies unite to stop Thanos from collecting the Infinity Stones.
+                  - id: 15
+                    title: 'Avengers: Endgame'
+                    release_year: 2019
+                    director: Anthony Russo and Joe Russo
+                    description: The surviving Avengers attempt to reverse the devastation caused by Thanos.
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+      tags:
+        - Movies
+    post:
+      operationId: createMovie
+#      x-exclude: true
+      summary: Create a new Marvel movie
+      description: Create a Marvel movie and add it to the movie list.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarvelMovieModel'
+            examples:
+              ironMan:
+                summary: Iron Man
+                value:
+                  title: Iron Man
+                  release_year: 2008
+                  director: Jon Favreau
+                  description: Tony Stark builds an armored suit and becomes Iron Man.
+              spiderMan:
+                summary: Spider-Man
+                value:
+                  title: Spider-Man
+                  release_year: 2002
+                  director: Sam Raimi
+                  description: Peter Parker becomes Spider-Man after being bitten by a genetically modified spider.
+              blackPanther:
+                summary: Black Panther
+                value:
+                  title: Black Panther
+                  release_year: 2018
+                  director: Ryan Coogler
+                  description: T'Challa returns to Wakanda to take his place as king and protector.
+              ironMan2:
+                summary: Iron Man 2
+                value:
+                  title: Iron Man 2
+                  release_year: 2010
+                  director: Jon Favreau
+                  description: Tony Stark faces pressure to share his armor technology while confronting new enemies.
+              spiderManNoWayHome:
+                summary: 'Spider-Man: No Way Home'
+                value:
+                  title: 'Spider-Man: No Way Home'
+                  release_year: 2021
+                  director: Jon Watts
+                  description: A spell exposes Peter Parker to villains and heroes from across the multiverse.
+              infinityWar:
+                summary: 'Avengers: Infinity War'
+                value:
+                  title: 'Avengers: Infinity War'
+                  release_year: 2018
+                  director: Anthony Russo and Joe Russo
+                  description: The Avengers and their allies unite to stop Thanos from collecting the Infinity Stones.
+              endgame:
+                summary: 'Avengers: Endgame'
+                value:
+                  title: 'Avengers: Endgame'
+                  release_year: 2019
+                  director: Anthony Russo and Joe Russo
+                  description: The surviving Avengers attempt to reverse the devastation caused by Thanos.
+      responses:
+        '201':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarvelMovieModel'
+        '422':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityError'
+      tags:
+        - Movies
+  '/movies/{movieId}':
+    get:
+      operationId: getMovie
+#      x-exclude: true
+      summary: Get a Marvel movie
+      description: Retrieve information about a specific Marvel movie.
+      parameters:
+        - $ref: '#/components/parameters/MovieId'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarvelMovieModel'
+              examples:
+                ironMan:
+                  summary: Iron Man
+                  value:
+                    id: 1
+                    title: Iron Man
+                    release_year: 2008
+                    director: Jon Favreau
+                    description: Tony Stark builds an armored suit and becomes Iron Man.
+                spiderMan:
+                  summary: Spider-Man
+                  value:
+                    id: 2
+                    title: Spider-Man
+                    release_year: 2002
+                    director: Sam Raimi
+                    description: Peter Parker becomes Spider-Man after being bitten by a genetically modified spider.
+                guardiansOfTheGalaxy:
+                  summary: Guardians of the Galaxy
+                  value:
+                    id: 4
+                    title: Guardians of the Galaxy
+                    release_year: 2014
+                    director: James Gunn
+                    description: A group of intergalactic outlaws joins forces to protect the galaxy.
+                ironMan3:
+                  summary: Iron Man 3
+                  value:
+                    id: 8
+                    title: Iron Man 3
+                    release_year: 2013
+                    director: Shane Black
+                    description: Tony Stark confronts the Mandarin and rebuilds after a devastating attack.
+                spiderManNoWayHome:
+                  summary: 'Spider-Man: No Way Home'
+                  value:
+                    id: 13
+                    title: 'Spider-Man: No Way Home'
+                    release_year: 2021
+                    director: Jon Watts
+                    description: A spell exposes Peter Parker to villains and heroes from across the multiverse.
+                infinityWar:
+                  summary: 'Avengers: Infinity War'
+                  value:
+                    id: 14
+                    title: 'Avengers: Infinity War'
+                    release_year: 2018
+                    director: Anthony Russo and Joe Russo
+                    description: The Avengers and their allies unite to stop Thanos from collecting the Infinity Stones.
+                endgame:
+                  summary: 'Avengers: Endgame'
+                  value:
+                    id: 15
+                    title: 'Avengers: Endgame'
+                    release_year: 2019
+                    director: Anthony Russo and Joe Russo
+                    description: The surviving Avengers attempt to reverse the devastation caused by Thanos.
+        '404':
+          description: Marvel movie not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+              example:
+                error: Marvel movie not found
+      tags:
+        - Movies
+  /appearances:
+    get:
+      operationId: getAppearances
+      summary: Get all Marvel appearances
+      description: Retrieve all links between Marvel heroes and movies.
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppearancesResponse'
+              example:
+                appearances:
+                  - id: 1
+                    hero_id: 1
+                    movie_id: 1
+                    role: lead
+                  - id: 2
+                    hero_id: 2
+                    movie_id: 2
+                    role: lead
+                  - id: 3
+                    hero_id: 1
+                    movie_id: 7
+                    role: lead
+                  - id: 4
+                    hero_id: 1
+                    movie_id: 8
+                    role: lead
+                  - id: 5
+                    hero_id: 1
+                    movie_id: 14
+                    role: lead
+                  - id: 6
+                    hero_id: 2
+                    movie_id: 14
+                    role: supporting
+                  - id: 7
+                    hero_id: 1
+                    movie_id: 15
+                    role: lead
+                  - id: 8
+                    hero_id: 2
+                    movie_id: 15
+                    role: cameo
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+      tags:
+        - Appearances
+    post:
+      operationId: createAppearance
+      summary: Create a Marvel appearance
+      description: Link a Marvel hero to a movie with a specific role.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppearanceModel'
+            example:
+              hero_id: 1
+              movie_id: 1
+              role: lead
+      responses:
+        '201':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppearanceModel'
+              example:
+                id: 1
+                hero_id: 1
+                movie_id: 1
+                role: lead
+        '422':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityError'
+      tags:
+        - Appearances
+  '/appearances/{appearanceId}':
+    get:
+      operationId: getAppearance
+      summary: Get a Marvel appearance
+      description: Retrieve a specific link between a Marvel hero and movie.
+      parameters:
+        - $ref: '#/components/parameters/AppearanceId'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppearanceModel'
+              example:
+                id: 1
+                hero_id: 1
+                movie_id: 1
+                role: lead
+        '404':
+          description: Marvel appearance not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+              example:
+                error: Marvel appearance not found
+      tags:
+        - Appearances
+  '/heroes/{heroId}/appearances':
+    get:
+      operationId: getHeroAppearances
+      summary: Get appearances for a Marvel hero
+      description: Retrieve all movie appearances for a specific Marvel hero.
+      parameters:
+        - $ref: '#/components/parameters/HeroId'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppearancesResponse'
+              example:
+                appearances:
+                  - id: 1
+                    hero_id: 1
+                    movie_id: 1
+                    role: main-character
+                  - id: 3
+                    hero_id: 1
+                    movie_id: 7
+                    role: lead
+                  - id: 4
+                    hero_id: 1
+                    movie_id: 8
+                    role: lead
+                  - id: 5
+                    hero_id: 1
+                    movie_id: 14
+                    role: lead
+                  - id: 7
+                    hero_id: 1
+                    movie_id: 15
+                    role: lead
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '404':
+          description: Marvel hero not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+              example:
+                error: Marvel hero not found
+      tags:
+        - Appearances
+components:
+  parameters:
+    HeroId:
+      name: heroId
+      in: path
+      required: true
+      description: ID of the Marvel hero
+      schema:
+        type: integer
+      example: 1
+    MovieId:
+      name: movieId
+      in: path
+      required: true
+      description: ID of the Marvel movie
+      schema:
+        type: integer
+      example: 1
+    AppearanceId:
+      name: appearanceId
+      in: path
+      required: true
+      description: ID of the Marvel appearance
+      schema:
+        type: integer
+      example: 1
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of items to return per page.
+      required: false
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+        minimum: 1
+    PageParam:
+      name: page
+      in: query
+      description: The page number for pagination.
+      required: false
+      schema:
+        type: integer
+        default: 1
+  schemas:
+    MarvelCharacterModel:
+      description: A Marvel character.
+      type: object
+      properties:
+        id:
+          description: ID of the Marvel character
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        name:
+          description: The full name of the Marvel character.
+          type: string
+          example: Iron Man
+        first_name:
+          description: The first name of the Marvel character.
+          type: string
+          example: Tony
+        last_name:
+          description: The last name of the Marvel character.
+          type: string
+          example: Stark
+        description:
+          description: A brief description of the Marvel character.
+          type: string
+          example: 'Genius, billionaire, playboy, philanthropist.'
+          nullable: true
+        powers:
+          description: List of superpowers possessed by the Marvel character.
+          type: array
+          items:
+            type: string
+          example:
+            - Superhuman strength
+            - Powered armor suit
+            - Genius-level intellect
+      additionalProperties: false
+      required:
+        - name
+    MarvelMovieModel:
+      description: A Marvel movie.
+      type: object
+      properties:
+        id:
+          description: ID of the Marvel movie.
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        title:
+          description: The title of the Marvel movie.
+          type: string
+          example: Iron Man
+        release_year:
+          description: The year the movie was released.
+          type: integer
+          example: 2008
+        director:
+          description: The director of the Marvel movie.
+          type: string
+          example: Jon Favreau
+        description:
+          description: A brief description of the Marvel movie.
+          type: string
+          example: Tony Stark builds an armored suit and becomes Iron Man.
+          nullable: true
+      additionalProperties: false
+      required:
+        - title
+        - release_year
+    AppearanceModel:
+      description: A Marvel hero's appearance in a movie.
+      type: object
+      properties:
+        id:
+          description: ID of the Marvel appearance.
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        hero_id:
+          description: ID of the Marvel hero.
+          type: integer
+          format: int64
+          example: 1
+        movie_id:
+          description: ID of the Marvel movie.
+          type: integer
+          format: int64
+          example: 1
+        role:
+          description: The hero's role in the movie.
+          type: string
+          enum:
+            - lead
+            - supporting
+            - cameo
+          example: lead
+      additionalProperties: false
+      required:
+        - hero_id
+        - movie_id
+        - role
+    HeroesResponse:
+      type: object
+      properties:
+        heroes:
+          description: List of Marvel heroes.
+          type: array
+          items:
+            $ref: '#/components/schemas/MarvelCharacterModel'
+          example:
+            - id: 1
+              name: Iron Man
+              first_name: Tony
+              last_name: Stark
+              description: 'Genius, billionaire, playboy, philanthropist.'
+              powers:
+                - Superhuman strength
+                - Powered armor suit
+                - Genius-level intellect
+            - id: 2
+              name: Spider-Man
+              first_name: Peter
+              last_name: Parker
+              description: Friendly neighborhood superhero.
+              powers:
+                - Wall-crawling
+                - Spider-sense
+                - Web-shooters
+        pagination:
+          $ref: '#/components/schemas/PaginationModel'
+    MoviesResponse:
+      type: object
+      properties:
+        movies:
+          description: List of Marvel movies.
+          type: array
+          items:
+            $ref: '#/components/schemas/MarvelMovieModel'
+        pagination:
+          $ref: '#/components/schemas/PaginationModel'
+    AppearancesResponse:
+      type: object
+      properties:
+        appearances:
+          description: List of Marvel hero appearances in movies.
+          type: array
+          items:
+            $ref: '#/components/schemas/AppearanceModel'
+        pagination:
+          $ref: '#/components/schemas/PaginationModel'
+    PaginationModel:
+      description: Pagination information.
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            total:
+              description: The total number of items for the requested resource.
+              type: integer
+              example: 10
+            current_page:
+              description: The current page number.
+              type: integer
+              example: 1
+            next_page:
+              description: The next page number. Null if there is no next page.
+              type: integer
+              example: 2
+              nullable: true
+            prev_page:
+              description: The previous page number. Null if there is no previous page.
+              type: integer
+              example: null
+              nullable: true
+            per_page:
+              description: The number of items to return per page.
+              type: integer
+              example: 10
+            total_pages:
+              description: The total number of pages.
+              type: integer
+              example: 10
+    UnprocessableEntityError:
+      type: object
+      properties:
+        error:
+          description: Description of the error.
+          type: string
+        details:
+          description: An array of objects providing details about the validation errors encountered in the request.
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                description: The field causing the validation error.
+                type: string
+              message:
+                description: Details about the validation error.
+                type: string
+      example:
+        error: Validation errors
+        details:
+          - field: first_name
+            message: Field 'first_name' must be of type 'String'.
+    BadRequestError:
+      type: object
+      properties:
+        error:
+          description: Description of the error.
+          type: string
+      example:
+        error: Page number cannot be greater than total number of pages
+    NotFoundError:
+      type: object
+      properties:
+        error:
+          description: Description of the error.
+          type: string
+      example:
+        error: Marvel hero not found
+#  securitySchemes:
+#    bearerAuth:
+#      type: http
+#      scheme: bearer
+#security: []
+#  - bearerAuth: []
+tags:
+  - name: Heroes
+    description: Manage all Marvel heroes.
+  - name: Movies
+    description: Manage all movies from the Marvel Universe.
+#    x-exclude: true
+  - name: Appearances
+    description: Manage links between Marvel heroes and movies.

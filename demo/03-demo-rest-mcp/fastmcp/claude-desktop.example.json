@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "marvel-fastmcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "http://127.0.0.1:8008/mcp",
+        "--transport",
+        "http-only"
+      ]
+    }
+  }
+}

@@ -1,0 +1,354 @@
+openapi: 3.0.3
+info:
+  title: Marvel Universe API
+  version: 1.0.0
+  description: 'API for retrieving, creating, updating, and deleting information about the Marvel Universe.'
+  x-logo:
+    url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/960px-Marvel_Logo.svg.png'
+servers:
+  - url: 'http://localhost:3004/api'
+    description: Local
+  - url: 'http://localhost:3005'
+    description: Mock
+paths:
+  /:
+    get:
+      operationId: getApiInfo
+      summary: Get API information
+      description: Return the API name and version.
+      security: []
+      responses:
+        '200':
+          description: API information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api:
+                    type: string
+                    example: Marvel Universe API
+                  version:
+                    type: string
+                    example: 1.0.0
+                additionalProperties: false
+                required:
+                  - api
+                  - version
+  /heroes:
+    get:
+      operationId: getHeroes
+      summary: Get all Marvel heroes
+      description: Retrieve a list of all Marvel heroes.
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeroesResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+      tags:
+        - Heroes
+    post:
+      operationId: postHeroes
+      summary: Create a new Marvel hero
+      description: Endpoint to create a new Marvel hero.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarvelCharacterModel'
+            example:
+              name: Rocket Raccoon
+              first_name: Rocket
+              last_name: Raccoon
+              description: A member of the Guardians of the Galaxy.
+              powers:
+                - Engineering genius
+                - Expert marksman
+                - Strategic thinking
+      responses:
+        '201':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarvelCharacterModel'
+        '422':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityError'
+      tags:
+        - Heroes
+  '/heroes/{heroId}':
+    get:
+      operationId: getHero
+      summary: Get a Marvel hero
+      description: Retrieve information about a specific Marvel hero.
+      parameters:
+        - $ref: '#/components/parameters/HeroId'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarvelCharacterModel'
+        '404':
+          description: Marvel hero not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+      tags:
+        - Heroes
+    put:
+      operationId: putHero
+      summary: Update a Marvel hero
+      description: Update information about a specific Marvel hero.
+      parameters:
+        - $ref: '#/components/parameters/HeroId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarvelCharacterModel'
+            example:
+              name: Rocket Raccoon
+              first_name: Rocket
+              last_name: Raccoon
+              description: A genetically modified raccoon with a knack for engineering and firearms. A member of the Guardians of the Galaxy.
+              powers:
+                - Engineering genius
+                - Expert marksman
+                - Strategic thinking
+      responses:
+        '200':
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarvelCharacterModel'
+        '404':
+          description: Marvel hero not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '422':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityError'
+      tags:
+        - Heroes
+    delete:
+      operationId: deleteHero
+      summary: Delete a Marvel hero
+      description: Delete a specific Marvel hero.
+      parameters:
+        - $ref: '#/components/parameters/HeroId'
+      responses:
+        '204':
+          description: Successfully deleted
+        '404':
+          description: Marvel hero not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+      tags:
+        - Heroes
+components:
+  parameters:
+    HeroId:
+      name: heroId
+      in: path
+      required: true
+      description: ID of the Marvel hero
+      schema:
+        type: integer
+      example: 1
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of items to return per page.
+      required: false
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+        minimum: 1
+    PageParam:
+      name: page
+      in: query
+      description: The page number for pagination.
+      required: false
+      schema:
+        type: integer
+        default: 1
+  schemas:
+    MarvelCharacterModel:
+      description: A Marvel character.
+      type: object
+      properties:
+        id:
+          description: ID of the Marvel character
+          type: integer
+          format: int64
+          example: ABC # TODO
+          readOnly: true
+        name:
+          description: The full name of the Marvel character.
+          type: string
+          example: Iron Man
+        first_name:
+          description: The first name of the Marvel character.
+          type: string
+          example: Tony
+        last_name:
+          description: The last name of the Marvel character.
+          type: string
+          example: Stark
+        description:
+          description: A brief description of the Marvel character.
+          type: string
+          example: 'Genius, billionaire, playboy, philanthropist.'
+          nullable: true
+        powers:
+          description: List of superpowers possessed by the Marvel character.
+          type: array
+          items:
+            type: string
+          example:
+            - Superhuman strength
+            - Powered armor suit
+            - Genius-level intellect
+      additionalProperties: false
+      required:
+        - name
+    HeroesResponse:
+      type: object
+      properties:
+        heroes:
+          description: List of Marvel heroes.
+          type: array
+          items:
+            $ref: '#/components/schemas/MarvelCharacterModel'
+          example:
+            heroes: # Wrong - Remove heroes and indent
+              - id: 1
+                name: Iron Man
+                first_name: Tony
+                last_name: Stark
+                description: 'Genius, billionaire, playboy, philanthropist.'
+                powers:
+                  - Superhuman strength
+                  - Powered armor suit
+                  - Genius-level intellect
+              - id: 2
+                name: Spider-Man
+                first_name: Peter
+                last_name: Parker
+                description: Friendly neighborhood superhero.
+                powers:
+                  - Wall-crawling
+                  - Spider-sense
+                  - Web-shooters
+        pagination:
+          $ref: '#/components/schemas/PaginationModel'
+    PaginationModel:
+      description: Pagination information.
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            total:
+              description: The total number of items for the requested resource.
+              type: integer
+              example: 100
+            current_page:
+              description: The current page number.
+              type: integer
+              example: 1
+            next_page:
+              description: The next page number. Null if there is no next page.
+              type: integer
+              example: 2
+              nullable: true
+            prev_page:
+              description: The previous page number. Null if there is no previous page.
+              type: integer
+              example: null
+              nullable: true
+            per_page:
+              description: The number of items to return per page.
+              type: integer
+              example: 10
+            total_pages:
+              description: The total number of pages.
+              type: integer
+              example: 10
+    UnprocessableEntityError:
+      type: object
+      properties:
+        error:
+          description: Description of the error.
+          type: string
+        details:
+          description: An array of objects providing details about the validation errors encountered in the request.
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                description: The field causing the validation error.
+                type: string
+              message:
+                description: Details about the validation error.
+                type: string
+      example:
+        error: Validation errors
+        details:
+          - field: first_name
+            message: Field 'first_name' must be of type 'String'.
+    BadRequestError:
+      type: object
+      properties:
+        error:
+          description: Description of the error.
+          type: string
+      example:
+        error: Page number cannot be greater than total number of pages
+    NotFoundError:
+      type: object
+      properties:
+        error:
+          description: Description of the error.
+          type: string
+      example:
+        error: Marvel hero not found
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - bearerAuth: [ ]
+tags:
+  - name: Heroes
+    description: Manage all Marvel heroes.

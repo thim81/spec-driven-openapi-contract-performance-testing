@@ -1,0 +1,21 @@
+{
+  "name": "demo-01-view-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "doc:start": "node server.js",
+    "doc:bump": "bump preview --live ../openapi.yml",
+    "doc:format": "openapi-format ../openapi.yml --output ../openapi_formatted.yml --keepComments",
+    "doc:lint": "redocly lint ../openapi.yml"
+  },
+  "devDependencies": {
+    "@apideck/portman": "^1.35.0",
+    "@inspectr/inspectr": "^1.9.1",
+    "@redocly/cli": "^2.34.0",
+    "@scalar/cli": "^2.0.0",
+    "bump-cli": "latest",
+    "openapi-format": "^1.33.1",
+    "yaml": "^2.9.0"
+  }
+}

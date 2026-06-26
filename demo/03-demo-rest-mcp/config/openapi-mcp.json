@@ -2,7 +2,7 @@
   "name": "marvel-appearance-mcp",
   "version": "1.0.0",
   "apiBaseUrl": "http://127.0.0.1:3007/api",
-  "openApiSpec": "../openapi-appearance.yml",
+  "openApiSpec": "../openapi-rest.yml",
   "includeTools": [
     "GET::heroes",
     "GET::heroes__---heroId",

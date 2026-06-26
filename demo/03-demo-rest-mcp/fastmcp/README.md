@@ -1,6 +1,6 @@
 # Marvel FastMCP demo
 
-This server generates MCP tools from `../../openapi-appearance.yml` using
+This server generates MCP tools from `../../openapi-rest.yml` using
 [FastMCP's OpenAPI integration](https://gofastmcp.com/integrations/openapi).
 An explicit route allowlist exposes only:
 

@@ -1,6 +1,6 @@
 # Inspectr mock service generated from the shared demo OpenAPI document.
 listen: ':3006'
-mockBackend: '../openapi-appearance.yml'
+mockBackend: '../openapi-rest.yml'
 mockDynamic: false
 
 # Inspectr application and request log.

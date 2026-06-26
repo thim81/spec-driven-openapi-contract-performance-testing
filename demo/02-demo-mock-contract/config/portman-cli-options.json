@@ -1,5 +1,5 @@
 {
-  "local": "../openapi-appearance.yml",
+  "local": "../openapi-rest.yml",
   "baseUrl": "https://marvel-api-mock.in-spectr.dev",
   "output": "./marvel.postman.json",
   "portmanConfigFile": "./config/portman-config.yaml",

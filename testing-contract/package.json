@@ -18,7 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "@apideck/portman": "^1.35.0",
-    "newman": "^6.2.1",
+    "newman": "^6.2.3",
     "newman-reporter-htmlextra": "^1.23.1",
     "newman-reporter-influxdb": "^2.0.4"
   }
